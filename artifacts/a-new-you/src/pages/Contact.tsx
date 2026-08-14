@@ -11,7 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { CheckCircle2 } from 'lucide-react';
 
 const formSchema = z.object({
-  name: z.string().min(2, 'Name is required'),
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Valid email is required'),
   phone: z.string().optional(),
   message: z.string().min(10, 'Please share a brief message about what brings you here'),
@@ -25,7 +26,8 @@ export default function Contact() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       phone: '',
       message: '',
@@ -107,19 +109,34 @@ export default function Contact() {
                 ) : (
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-charcoal font-medium">Name</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Your full name" {...field} className="bg-porcelain border-aubergine/10 focus-visible:ring-champagne rounded-md" />
-                            </FormControl>
-                            <FormMessage className="text-rose" />
-                          </FormItem>
-                        )}
-                      />
+                      <div className="grid grid-cols-2 gap-4">
+                        <FormField
+                          control={form.control}
+                          name="firstName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-charcoal font-medium">First name</FormLabel>
+                              <FormControl>
+                                <Input placeholder="First name" {...field} className="bg-porcelain border-aubergine/10 focus-visible:ring-champagne rounded-md" />
+                              </FormControl>
+                              <FormMessage className="text-rose" />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="lastName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-charcoal font-medium">Last name</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Last name" {...field} className="bg-porcelain border-aubergine/10 focus-visible:ring-champagne rounded-md" />
+                              </FormControl>
+                              <FormMessage className="text-rose" />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                       <FormField
                         control={form.control}
                         name="email"
