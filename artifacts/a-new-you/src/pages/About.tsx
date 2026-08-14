@@ -3,7 +3,7 @@ import { Layout } from '@/components/layout/Layout';
 import { FadeIn } from '@/components/ui/fade-in';
 import { Button } from '@/components/ui/button';
 
-import aboutPortrait from '@/assets/about-portrait.jpg';
+import aboutPortrait from '@assets/Christine_Hero_1786696065293.webp';
 
 export default function About() {
   return (

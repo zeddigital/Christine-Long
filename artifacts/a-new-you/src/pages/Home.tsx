@@ -4,8 +4,8 @@ import { FadeIn } from '@/components/ui/fade-in';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Quote } from 'lucide-react';
 
-import heroPortrait from '@/assets/hero-portrait.jpg';
-import aboutPortrait from '@/assets/about-portrait.jpg';
+import heroPortrait from '@assets/Christine_Hero_1786696065293.webp';
+import aboutPortrait from '@assets/CHRISTINE-PROGRAMS-RESIZED_1786696072425.jpg';
 import article1 from '@/assets/article-1.jpg';
 import article2 from '@/assets/article-2.jpg';
 import article3 from '@/assets/article-3.jpg';
