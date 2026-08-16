@@ -129,7 +129,7 @@ export default function About() {
           <FadeIn>
             <h2 className="mb-8">Start with a conversation</h2>
             <Link href="/contact">
-              <Button size="lg" className="bg-rose hover:bg-rose/90 text-warm-white border-none rounded text-lg px-10 h-14">
+              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-10 h-14">
                 Book a Clarity Call
               </Button>
             </Link>

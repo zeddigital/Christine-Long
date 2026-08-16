@@ -52,7 +52,7 @@ export function Header() {
               <Link
                 key={link.path}
                 href={link.path}
-                className={`text-[11px] font-semibold tracking-[0.15em] uppercase transition-colors duration-200 hover:text-champagne ${
+                className={`text-xs font-semibold tracking-[0.15em] uppercase transition-colors duration-200 hover:text-champagne ${
                   location === link.path ? 'text-champagne' : 'text-warm-white/70'
                 }`}
               >
@@ -63,7 +63,7 @@ export function Header() {
 
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hidden sm:inline-flex">
-              <Button className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[10px] font-bold tracking-[0.2em] uppercase px-6 h-10">
+              <Button className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-6 h-10">
                 Book a Clarity Call
               </Button>
             </Link>
@@ -98,7 +98,7 @@ export function Header() {
           ))}
           <div className="mt-4 pt-4 border-t border-white/10">
             <Link href="/contact" className="block sm:hidden">
-              <Button className="w-full bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[10px] font-bold tracking-[0.2em] uppercase h-12">
+              <Button className="w-full bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase h-12">
                 Book a Clarity Call
               </Button>
             </Link>

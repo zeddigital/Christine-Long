@@ -37,7 +37,7 @@ export default function ClientStories() {
                 <cite className="block font-sans font-medium text-plum not-italic">
                   — S.M., Business Owner, Melbourne
                 </cite>
-                <div className="mt-4 text-xs font-medium text-rose uppercase tracking-widest">[Placeholder pending permission]</div>
+                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
               </FadeIn>
 
               <FadeIn delay={0.1} className="bg-warm-white p-10 md:p-12 rounded-xl shadow-sm border border-black/[0.02] relative">
@@ -47,7 +47,7 @@ export default function ClientStories() {
                 <cite className="block font-sans font-medium text-plum not-italic">
                   — A.L., Senior Executive
                 </cite>
-                <div className="mt-4 text-xs font-medium text-rose uppercase tracking-widest">[Placeholder pending permission]</div>
+                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
               </FadeIn>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function ClientStories() {
                 <cite className="block font-sans font-medium text-plum not-italic">
                   — K.T.
                 </cite>
-                <div className="mt-4 text-xs font-medium text-rose uppercase tracking-widest">[Placeholder pending permission]</div>
+                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
               </FadeIn>
 
               <FadeIn delay={0.1} className="bg-warm-white p-10 rounded-xl shadow-sm border border-black/[0.02]">
@@ -75,7 +75,7 @@ export default function ClientStories() {
                 <cite className="block font-sans font-medium text-plum not-italic">
                   — J.R.
                 </cite>
-                <div className="mt-4 text-xs font-medium text-rose uppercase tracking-widest">[Placeholder pending permission]</div>
+                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
               </FadeIn>
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function ClientStories() {
               If you resonate with these stories and are ready to address the patterns holding you back, the first step is a simple conversation.
             </p>
             <Link href="/contact">
-              <Button size="lg" className="bg-rose hover:bg-rose/90 text-warm-white border-none rounded text-lg px-10 h-14">
+              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-10 h-14">
                 Book Your Clarity Call
               </Button>
             </Link>

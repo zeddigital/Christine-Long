@@ -103,7 +103,7 @@
   --accent: 8 33% 60%; /* Aged Rose */
   --accent-foreground: 34 100% 98%;
   
-  --destructive: 0 84% 60%;
+  --destructive: 0 72% 35%; /* Dark red: ~8:1 on white/porcelain — WCAG AA */
   --destructive-foreground: 34 100% 98%;
   
   --input: 13 22% 90%;
@@ -144,7 +144,7 @@
   --muted-foreground: 308 13% 36%;
   --accent: 8 33% 60%; 
   --accent-foreground: 34 100% 98%;
-  --destructive: 0 84% 60%;
+  --destructive: 0 72% 35%; /* Dark red: ~8:1 on white/porcelain — WCAG AA */
   --destructive-foreground: 34 100% 98%;
   --input: 13 22% 90%;
   --ring: 38 45% 60%; 
@@ -159,6 +159,28 @@
   --sidebar-ring: 38 45% 60%;
 }
 
+/* Skip navigation — WCAG 2.2 SC 2.4.1 */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: hsl(293 20% 16%); /* aubergine */
+  color: hsl(34 100% 98%);      /* warm-white */
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid hsl(38 45% 60%); /* champagne focus ring */
+  outline-offset: 2px;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -166,6 +188,17 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground text-[17px] md:text-[18px] tracking-wide;
+  }
+
+  /* Global focus indicator — WCAG 2.2 SC 2.4.7 / 1.4.11 (3:1 min) */
+  :focus-visible {
+    outline: 2px solid hsl(293 20% 16%); /* aubergine ~14:1 on light surfaces */
+    outline-offset: 3px;
+  }
+  /* On dark (aubergine/plum) surfaces, reverse to champagne */
+  .bg-aubergine :focus-visible,
+  .bg-plum :focus-visible {
+    outline-color: hsl(38 45% 60%); /* champagne ~6.7:1 on aubergine */
   }
 
   h1, h2, h3, h4, h5, h6 {

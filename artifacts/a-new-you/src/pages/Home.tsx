@@ -31,7 +31,7 @@ export default function Home() {
           <div className="px-8 sm:px-12 lg:px-16 xl:px-24 pt-28 pb-20 lg:pt-36 lg:pb-28 w-full">
             <div className="lg:max-w-xl xl:max-w-2xl ml-auto">
               <FadeIn delay={0.1}>
-                <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase mb-10 block">
+                <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-10 block">
                   Christine M Long · Transformation Practice
                 </span>
               </FadeIn>
@@ -49,7 +49,7 @@ export default function Home() {
                 <Link href="/contact">
                   <Button
                     size="lg"
-                    className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-8 h-14 w-full sm:w-auto"
+                    className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8 h-14 w-full sm:w-auto"
                   >
                     Book a Clarity Call
                   </Button>
@@ -58,7 +58,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-warm-white/20 text-warm-white hover:bg-warm-white/5 rounded-none text-[11px] font-semibold tracking-[0.15em] uppercase px-8 h-14 w-full sm:w-auto"
+                    className="border-warm-white/20 text-warm-white hover:bg-warm-white/5 rounded-none text-xs font-semibold tracking-[0.15em] uppercase px-8 h-14 w-full sm:w-auto"
                   >
                     Explore Work Together
                   </Button>
@@ -66,7 +66,7 @@ export default function Home() {
               </FadeIn>
               <FadeIn delay={0.5}>
                 <div className="mt-12 pt-10 border-t border-white/10">
-                  <p className="text-warm-white/35 text-[10px] tracking-[0.25em] uppercase">
+                  <p className="text-warm-white/75 text-xs tracking-[0.25em] uppercase">
                     35+ years · Melbourne & Online Australia-wide · Founder-led
                   </p>
                 </div>
@@ -80,7 +80,7 @@ export default function Home() {
       <section className="bg-plum py-24 md:py-36">
         <div className="container mx-auto px-8 md:px-12 max-w-5xl">
           <FadeIn>
-            <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase mb-16 block">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-16 block">
               Does this sound familiar?
             </span>
           </FadeIn>
@@ -98,7 +98,7 @@ export default function Home() {
             ))}
           </div>
           <FadeIn delay={0.4}>
-            <p className="text-warm-white/55 text-lg md:text-xl leading-relaxed mt-16 max-w-2xl">
+            <p className="text-warm-white/90 text-lg md:text-xl leading-relaxed mt-16 max-w-2xl">
               More information is rarely the answer. The real shift begins when you can see what is driving the pattern — and work with it differently.
             </p>
           </FadeIn>
@@ -109,7 +109,7 @@ export default function Home() {
       <section className="bg-porcelain py-24 md:py-36">
         <div className="container mx-auto px-8 md:px-12 max-w-6xl">
           <FadeIn className="text-center mb-20">
-            <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-6">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-6">
               What changes
             </span>
             <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl lg:text-[3.5rem] leading-tight max-w-3xl mx-auto">
@@ -140,7 +140,7 @@ export default function Home() {
       <section className="bg-aubergine py-24 md:py-36">
         <div className="container mx-auto px-8 md:px-12 max-w-5xl">
           <FadeIn className="mb-16">
-            <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-6">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-6">
               Work with Christine
             </span>
             <h2 className="font-serif text-warm-white text-4xl md:text-5xl lg:text-[3.5rem] leading-tight">
@@ -177,7 +177,7 @@ export default function Home() {
                     <h3 className="font-serif text-warm-white text-2xl md:text-3xl mb-3 group-hover:text-champagne transition-colors duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-warm-white/55 text-lg leading-relaxed">{service.desc}</p>
+                    <p className="text-warm-white/70 text-lg leading-relaxed">{service.desc}</p>
                   </div>
                   <Link
                     href={service.linkPath}
@@ -208,7 +208,7 @@ export default function Home() {
           <div className="lg:w-[55%] bg-porcelain flex items-center">
             <div className="px-8 sm:px-12 lg:px-20 xl:px-28 py-20 max-w-2xl">
               <FadeIn>
-                <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-8">
+                <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-8">
                   About Christine
                 </span>
                 <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl leading-tight mb-8">
@@ -231,7 +231,7 @@ export default function Home() {
                   ))}
                 </div>
                 <Link href="/about">
-                  <Button className="bg-aubergine hover:bg-aubergine/90 text-warm-white border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-8 h-12">
+                  <Button className="bg-aubergine hover:bg-aubergine/90 text-warm-white border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8 h-12">
                     Meet Christine <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -245,7 +245,7 @@ export default function Home() {
       <section className="bg-warm-white py-24 md:py-36">
         <div className="container mx-auto px-8 md:px-12 max-w-6xl">
           <FadeIn className="text-center mb-20">
-            <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-6">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-6">
               How it works
             </span>
             <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl lg:text-[3.5rem] leading-tight">
@@ -273,7 +273,7 @@ export default function Home() {
             ].map((step, idx) => (
               <FadeIn key={idx} delay={0.1 * idx} className="relative p-12 md:p-14 overflow-hidden">
                 {/* Watermark numeral */}
-                <span className="absolute -top-6 -left-2 font-serif text-[9rem] text-aubergine/5 leading-none pointer-events-none select-none">
+                <span aria-hidden="true" className="absolute -top-6 -left-2 font-serif text-[9rem] text-aubergine/5 leading-none pointer-events-none select-none">
                   {step.num}
                 </span>
                 <div className="relative z-10">
@@ -291,13 +291,13 @@ export default function Home() {
       <section className="bg-plum py-24 md:py-40">
         <div className="container mx-auto px-8 md:px-12 max-w-4xl text-center">
           <FadeIn>
-            <span className="font-serif text-champagne/25 text-[8rem] leading-none block mb-0 select-none">
+            <span aria-hidden="true" className="font-serif text-champagne/25 text-[8rem] leading-none block mb-0 select-none">
               "
             </span>
             <blockquote className="font-serif italic text-warm-white text-2xl md:text-3xl lg:text-[2.2rem] leading-relaxed -mt-6 mb-10">
               I had spent years in personal development and understood myself well — or so I thought. Christine helped me see a pattern I had completely missed. Within a few sessions I made a decision I had been avoiding for two years. The difference in how I approach my business now is tangible.
             </blockquote>
-            <cite className="text-champagne font-sans font-semibold tracking-[0.25em] text-[10px] uppercase not-italic block mb-16">
+            <cite className="text-champagne font-sans font-semibold tracking-[0.25em] text-xs uppercase not-italic block mb-16">
               S.M. · Business Owner, Melbourne
             </cite>
           </FadeIn>
@@ -305,7 +305,7 @@ export default function Home() {
             <Link href="/client-stories">
               <Button
                 variant="outline"
-                className="border-warm-white/20 text-warm-white hover:bg-warm-white/5 rounded-none text-[11px] font-semibold tracking-[0.2em] uppercase px-8 h-12"
+                className="border-warm-white/20 text-warm-white hover:bg-warm-white/5 rounded-none text-xs font-semibold tracking-[0.2em] uppercase px-8 h-12"
               >
                 Read Client Stories <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -319,7 +319,7 @@ export default function Home() {
         <div className="container mx-auto px-8 md:px-12 max-w-5xl">
           <FadeIn>
             <div className="border-l-4 border-champagne pl-10 md:pl-16 py-4">
-              <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-8">
+              <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-8">
                 Featured Program
               </span>
               <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl mb-6 leading-tight">
@@ -351,7 +351,7 @@ export default function Home() {
                 ))}
               </div>
               <Link href="/contact">
-                <Button className="bg-aubergine hover:bg-aubergine/90 text-warm-white border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-8 h-12">
+                <Button className="bg-aubergine hover:bg-aubergine/90 text-warm-white border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8 h-12">
                   Enquire about Availability
                 </Button>
               </Link>
@@ -365,7 +365,7 @@ export default function Home() {
         <div className="container mx-auto px-8 md:px-12 max-w-6xl">
           <FadeIn className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14 pb-10 border-b border-blush gap-6">
             <div>
-              <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-4">
+              <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-4">
                 Inspired Insights
               </span>
               <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl leading-tight">
@@ -421,26 +421,26 @@ export default function Home() {
       <section className="bg-aubergine py-28 md:py-44 text-center">
         <div className="container mx-auto px-8 max-w-3xl">
           <FadeIn>
-            <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase block mb-10">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-10">
               Ready to begin?
             </span>
             <h2 className="font-serif italic text-warm-white text-4xl md:text-5xl lg:text-[3.5rem] leading-tight mb-10">
               You do not need to have everything worked out before we talk.
             </h2>
-            <p className="text-warm-white/55 text-xl leading-relaxed mb-14 max-w-xl mx-auto">
+            <p className="text-warm-white/70 text-xl leading-relaxed mb-14 max-w-xl mx-auto">
               If something in your life or business is asking to change, begin with a private, no-pressure conversation about where you are and what support may fit.
             </p>
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-12 h-16"
+                className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-12 h-16"
               >
                 Book Your Complimentary Clarity Call
               </Button>
             </Link>
-            <p className="text-warm-white/35 mt-10 text-sm tracking-wide">
+            <p className="text-warm-white/65 mt-10 text-sm tracking-wide">
               or call Christine on{' '}
-              <a href="tel:0409140173" className="text-warm-white/55 hover:text-warm-white transition-colors">
+              <a href="tel:0409140173" className="text-warm-white/70 hover:text-warm-white transition-colors">
                 0409 140 173
               </a>
             </p>

@@ -37,31 +37,31 @@ export default function WorkWithChristine() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FadeIn delay={0.1} className="bg-warm-white p-8 rounded-lg shadow-sm">
-              <div className="text-champagne font-serif text-xl mb-4 italic">"I feel personally stuck"</div>
+              <div className="text-plum font-serif text-xl mb-4 italic">"I feel personally stuck"</div>
               <p className="text-charcoal mb-6 text-sm leading-relaxed">
                 You might be navigating a life transition, feeling a loss of confidence, or noticing recurring habits that drain your energy and prevent you from living fully.
               </p>
-              <a href="#personal" className="text-rose font-medium text-sm flex items-center hover:text-rose/80">
+              <a href="#personal" className="text-aubergine font-medium text-sm flex items-center hover:text-aubergine/70">
                 Personal Transformation <ArrowRight className="ml-1 w-4 h-4" />
               </a>
             </FadeIn>
 
             <FadeIn delay={0.2} className="bg-warm-white p-8 rounded-lg shadow-sm">
-              <div className="text-champagne font-serif text-xl mb-4 italic">"My business is draining me"</div>
+              <div className="text-plum font-serif text-xl mb-4 italic">"My business is draining me"</div>
               <p className="text-charcoal mb-6 text-sm leading-relaxed">
                 You are a founder or leader and the business is amplifying your personal patterns. You need clarity to make better decisions without burning out.
               </p>
-              <a href="#leadership" className="text-rose font-medium text-sm flex items-center hover:text-rose/80">
+              <a href="#leadership" className="text-aubergine font-medium text-sm flex items-center hover:text-aubergine/70">
                 Leadership & Business <ArrowRight className="ml-1 w-4 h-4" />
               </a>
             </FadeIn>
 
             <FadeIn delay={0.3} className="bg-warm-white p-8 rounded-lg shadow-sm">
-              <div className="text-champagne font-serif text-xl mb-4 italic">"I want a structured process"</div>
+              <div className="text-plum font-serif text-xl mb-4 italic">"I want a structured process"</div>
               <p className="text-charcoal mb-6 text-sm leading-relaxed">
                 You prefer a defined framework to guide you through a period of change, with clear steps and dedicated support over several weeks.
               </p>
-              <Link href="/programs" className="text-rose font-medium text-sm flex items-center hover:text-rose/80">
+              <Link href="/programs" className="text-aubergine font-medium text-sm flex items-center hover:text-aubergine/70">
                 View Programs <ArrowRight className="ml-1 w-4 h-4" />
               </Link>
             </FadeIn>
@@ -97,7 +97,7 @@ export default function WorkWithChristine() {
               </ul>
               
               <Link href="/contact">
-                <Button className="bg-rose hover:bg-rose/90 text-warm-white border-none rounded px-8">
+                <Button className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8">
                   Enquire About Sessions
                 </Button>
               </Link>
@@ -155,7 +155,7 @@ export default function WorkWithChristine() {
               </p>
               
               <Link href="/contact">
-                <Button className="bg-rose hover:bg-rose/90 text-warm-white border-none rounded px-8">
+                <Button className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8">
                   Enquire About Leadership Support
                 </Button>
               </Link>
@@ -251,7 +251,7 @@ export default function WorkWithChristine() {
               Book a complimentary conversation to discuss your circumstances.
             </p>
             <Link href="/contact">
-              <Button size="lg" className="bg-rose hover:bg-rose/90 text-warm-white border-none rounded text-lg px-10 h-14">
+              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-10 h-14">
                 Book a Clarity Call
               </Button>
             </Link>
