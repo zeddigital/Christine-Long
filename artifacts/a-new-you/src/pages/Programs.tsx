@@ -221,7 +221,7 @@ function ProgramCard({
 
   return (
     <div
-      className={`flex flex-col bg-aubergine transition-all duration-300 ${
+      className={`flex flex-col h-full bg-aubergine transition-all duration-300 ${
         isSelected
           ? 'ring-2 ring-champagne ring-offset-0'
           : featured
@@ -244,9 +244,8 @@ function ProgramCard({
           className="w-full h-full object-cover object-center"
           loading="lazy"
         />
-        {/* gradient so badge is always legible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-aubergine/60 via-transparent to-transparent" />
-        <span className="absolute top-5 left-6 text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase">
+        {/* pill badge — guaranteed legible on any photo */}
+        <span className="absolute top-5 left-5 bg-aubergine/90 px-3 py-1.5 text-champagne text-[9px] font-bold tracking-[0.28em] uppercase">
           {program.badge}
         </span>
       </div>
@@ -507,9 +506,9 @@ export default function Programs() {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
             {PROGRAMS.map((program) => (
-              <FadeIn key={program.id}>
+              <FadeIn key={program.id} className="h-full">
                 <ProgramCard program={program} featured={program.id === 'signature'} />
               </FadeIn>
             ))}
