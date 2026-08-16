@@ -273,7 +273,7 @@ export default function Home() {
             ].map((step, idx) => (
               <FadeIn key={idx} delay={0.1 * idx} className="relative p-12 md:p-14 overflow-hidden">
                 {/* Watermark numeral */}
-                <span aria-hidden="true" className="absolute -top-6 -left-2 font-serif text-[9rem] text-aubergine/5 leading-none pointer-events-none select-none">
+                <span aria-hidden="true" className="absolute -top-6 left-6 font-serif text-[9rem] text-aubergine/5 leading-none pointer-events-none select-none">
                   {step.num}
                 </span>
                 <div className="relative z-10">
