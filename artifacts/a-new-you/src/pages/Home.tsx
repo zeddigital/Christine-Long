@@ -271,16 +271,12 @@ export default function Home() {
                 desc: 'Work through the pattern with personalised support and actions that fit your life.',
               },
             ].map((step, idx) => (
-              <FadeIn key={idx} delay={0.1 * idx} className="relative p-12 md:p-14 overflow-hidden">
-                {/* Watermark numeral */}
-                <span aria-hidden="true" className="absolute -top-6 left-6 font-serif text-[9rem] text-aubergine/5 leading-none pointer-events-none select-none">
+              <FadeIn key={idx} delay={0.1 * idx} className="px-10 md:px-14 py-12 md:py-16">
+                <div aria-hidden="true" className="font-serif italic text-[5.5rem] leading-none text-champagne mb-6 select-none">
                   {step.num}
-                </span>
-                <div className="relative z-10">
-                  <div className="w-8 h-px bg-champagne mb-8" />
-                  <h3 className="font-serif text-2xl text-aubergine mb-4">{step.title}</h3>
-                  <p className="text-charcoal leading-relaxed">{step.desc}</p>
                 </div>
+                <h3 className="font-serif text-2xl text-aubergine mb-4">{step.title}</h3>
+                <p className="text-charcoal leading-relaxed">{step.desc}</p>
               </FadeIn>
             ))}
           </div>
