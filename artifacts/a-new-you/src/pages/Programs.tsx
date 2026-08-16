@@ -320,7 +320,7 @@ function ProgramCard({
           </div>
 
           {/* Price display */}
-          <div className="flex items-end gap-2 mb-1">
+          <div className="flex items-end gap-2 mb-4">
             <span className="font-serif italic text-warm-white text-[2.4rem] leading-none">
               {paymentType === 'full'
                 ? fmt(program.fullPrice)
