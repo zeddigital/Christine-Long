@@ -15,7 +15,7 @@ export default function Home() {
     <Layout>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative flex flex-col lg:flex-row min-h-screen -mt-20">
+      <section className="relative flex flex-col lg:flex-row min-h-[75vh] -mt-20">
 
         {/* Photo panel — top on mobile, right on desktop */}
         <div className="relative order-1 lg:order-2 lg:w-[48%] aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto flex-shrink-0">
