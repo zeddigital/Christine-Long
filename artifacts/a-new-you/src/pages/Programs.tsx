@@ -330,7 +330,7 @@ function ProgramCard({
               <span className="text-warm-white/40 text-sm mb-1.5">/{periodAbbr}</span>
             )}
           </div>
-          <p className="text-warm-white/35 text-xs mb-10 leading-relaxed">
+          <p className="text-warm-white/35 text-xs mb-12 leading-relaxed">
             {paymentType === 'full'
               ? `Save ${fmt(saving)} compared with the payment plan · AUD`
               : `${program.planCount} payments · Total ${fmt(program.planTotal)} AUD`}
