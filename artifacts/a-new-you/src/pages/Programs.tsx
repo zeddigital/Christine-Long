@@ -229,14 +229,19 @@ function ProgramCard({
           : ''
       }`}
     >
-      {/* Featured ribbon */}
-      {featured && (
-        <div className="bg-champagne text-aubergine text-[9px] font-bold tracking-[0.25em] uppercase text-center py-2">
-          Most comprehensive
-        </div>
-      )}
+      {/* Top strip — every card has one so images always start at the same Y.
+          Featured card shows the "Most comprehensive" ribbon; others get an
+          invisible spacer of identical line-height so the image top edges align. */}
+      <div
+        className={`text-[9px] font-bold tracking-[0.25em] uppercase text-center py-2 ${
+          featured ? 'bg-champagne text-aubergine' : 'bg-aubergine text-transparent select-none'
+        }`}
+        aria-hidden={!featured}
+      >
+        {featured ? 'Most comprehensive' : '·'}
+      </div>
 
-      {/* Image — centered crop, no top-bias */}
+      {/* Image — pure photo, no overlay text, no face-covering badge */}
       <div className="relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
         <img
           src={program.image}
@@ -244,15 +249,15 @@ function ProgramCard({
           className="w-full h-full object-cover object-center"
           loading="lazy"
         />
-        {/* pill badge — guaranteed legible on any photo */}
-        <span className="absolute top-5 left-5 bg-aubergine/90 px-3 py-1.5 text-champagne text-[9px] font-bold tracking-[0.28em] uppercase">
-          {program.badge}
-        </span>
       </div>
 
       {/* Body */}
       <div className="flex flex-col flex-1 p-8">
-        {/* Title + tagline */}
+        {/* Badge — duration/format label, now in the body not the image */}
+        <span className="text-champagne text-[9px] font-bold tracking-[0.28em] uppercase mb-3 block">
+          {program.badge}
+        </span>
+        {/* Title */}
         <h3 className="font-serif italic text-warm-white text-[1.6rem] leading-tight mb-3">
           {program.name}
         </h3>
