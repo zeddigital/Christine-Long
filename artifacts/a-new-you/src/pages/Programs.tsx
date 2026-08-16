@@ -372,7 +372,7 @@ export default function Programs() {
               Become the leader your calling requires.
             </h1>
             <p className="text-warm-white/70 text-xl leading-relaxed max-w-2xl mb-14">
-              Resolve the unseen patterns affecting how you lead, decide and live — so you can move forward with greater clarity, confidence and freedom.
+              Resolve the unseen patterns affecting how you lead, decide and live so you can move forward with greater clarity, confidence and freedom.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
               <a href="#programs">
