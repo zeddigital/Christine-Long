@@ -99,7 +99,7 @@ export default function Home() {
           </div>
           <FadeIn delay={0.4}>
             <p className="text-warm-white/90 text-lg md:text-xl leading-relaxed mt-16 max-w-2xl">
-              More information is rarely the answer. The real shift begins when you can see what is driving the pattern — and work with it differently.
+              More information is rarely the answer. The real shift begins when you can see what is driving the pattern and work with it differently.
             </p>
           </FadeIn>
         </div>
