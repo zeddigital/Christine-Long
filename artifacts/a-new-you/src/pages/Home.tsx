@@ -24,10 +24,6 @@ export default function Home() {
             alt="Christine M Long"
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
-          {/* Gradient blending left edge into aubergine panel on desktop */}
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#2E2030] to-transparent" />
-          {/* Gradient blending bottom into aubergine panel on mobile */}
-          <div className="lg:hidden absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#2E2030] to-transparent" />
         </div>
 
         {/* Text panel */}
@@ -206,8 +202,6 @@ export default function Home() {
               alt="Christine M Long"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
-            {/* Right gradient blending into porcelain panel */}
-            <div className="hidden lg:block absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-porcelain to-transparent" />
           </div>
 
           {/* Text — right half */}
