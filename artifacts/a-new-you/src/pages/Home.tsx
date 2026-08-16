@@ -318,9 +318,11 @@ export default function Home() {
               <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-8">
                 Featured Program
               </span>
-              <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl mb-6 leading-tight">
-                Luminous Break Free
-              </h2>
+              <Link href="/programs">
+                <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl mb-6 leading-tight hover:text-plum transition-colors cursor-pointer">
+                  Luminous Break Free
+                </h2>
+              </Link>
               <p className="text-charcoal text-xl leading-relaxed mb-12 max-w-2xl">
                 A personalised, structured transformation journey for women ready to move beyond repeating patterns and reclaim clarity and direction.
               </p>
