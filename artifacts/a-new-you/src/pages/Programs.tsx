@@ -189,7 +189,13 @@ function fmt(n: number) {
 
 // ─── Program card ─────────────────────────────────────────────────────────────
 
-function ProgramCard({ program }: { program: (typeof PROGRAMS)[number] }) {
+function ProgramCard({
+  program,
+  featured = false,
+}: {
+  program: (typeof PROGRAMS)[number];
+  featured?: boolean;
+}) {
   const [paymentType, setPaymentType] = useState<PaymentType>('full');
   const [showAll, setShowAll] = useState(false);
   const { addProgram, program: cartProgram } = useCart();
@@ -197,6 +203,7 @@ function ProgramCard({ program }: { program: (typeof PROGRAMS)[number] }) {
   const isSelected = cartProgram?.id === program.id;
   const periodAbbr = program.planPeriod === 'week' ? 'wk' : 'mo';
   const visibleIncludes = showAll ? program.includes : program.includes.slice(0, 4);
+  const saving = program.planTotal - program.fullPrice;
 
   function handleSelect() {
     addProgram({
@@ -213,44 +220,64 @@ function ProgramCard({ program }: { program: (typeof PROGRAMS)[number] }) {
   }
 
   return (
-    <div className={`flex flex-col bg-warm-white border-2 transition-colors ${isSelected ? 'border-champagne' : 'border-transparent'}`}>
-      {/* Image */}
-      <div className="aspect-[4/3] overflow-hidden">
+    <div
+      className={`flex flex-col bg-aubergine transition-all duration-300 ${
+        isSelected
+          ? 'ring-2 ring-champagne ring-offset-0'
+          : featured
+          ? 'ring-1 ring-white/20'
+          : ''
+      }`}
+    >
+      {/* Featured ribbon */}
+      {featured && (
+        <div className="bg-champagne text-aubergine text-[9px] font-bold tracking-[0.25em] uppercase text-center py-2">
+          Most comprehensive
+        </div>
+      )}
+
+      {/* Image — centered crop, no top-bias */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
         <img
           src={program.image}
           alt={program.name}
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-center"
           loading="lazy"
         />
+        {/* gradient so badge is always legible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-aubergine/60 via-transparent to-transparent" />
+        <span className="absolute top-5 left-6 text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase">
+          {program.badge}
+        </span>
       </div>
 
       {/* Body */}
       <div className="flex flex-col flex-1 p-8">
-        <span className="text-champagne text-[10px] font-semibold tracking-[0.3em] uppercase mb-3 block">
-          {program.badge}
-        </span>
-        <h3 className="font-serif italic text-aubergine text-2xl leading-tight mb-4">
+        {/* Title + tagline */}
+        <h3 className="font-serif italic text-warm-white text-[1.6rem] leading-tight mb-3">
           {program.name}
         </h3>
-        <p className="text-charcoal text-sm leading-relaxed mb-6">{program.description}</p>
+        <p className="text-warm-white/55 text-sm leading-relaxed mb-7">
+          {program.description}
+        </p>
 
         {/* Best for */}
-        <div className="border-t border-blush pt-5 mb-5">
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-charcoal/50 mb-2">
+        <div className="border-t border-white/10 pt-5 mb-5">
+          <p className="text-[9px] font-semibold tracking-[0.28em] uppercase text-champagne mb-2">
             Choose this if
           </p>
-          <p className="text-charcoal text-sm leading-relaxed">{program.bestFor}</p>
+          <p className="text-warm-white/70 text-sm leading-relaxed">{program.bestFor}</p>
         </div>
 
         {/* Includes */}
-        <div className="border-t border-blush pt-5 mb-6 flex-1">
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-charcoal/50 mb-4">
+        <div className="border-t border-white/10 pt-5 mb-7 flex-1">
+          <p className="text-[9px] font-semibold tracking-[0.28em] uppercase text-champagne mb-4">
             What's included
           </p>
-          <ul className="space-y-2.5">
+          <ul className="space-y-3">
             {visibleIncludes.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-charcoal leading-relaxed">
-                <Check className="w-3.5 h-3.5 text-champagne mt-0.5 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-sm text-warm-white/70 leading-relaxed">
+                <Check className="w-3.5 h-3.5 text-champagne mt-[0.2em] shrink-0" />
                 {item}
               </li>
             ))}
@@ -258,62 +285,65 @@ function ProgramCard({ program }: { program: (typeof PROGRAMS)[number] }) {
           {program.includes.length > 4 && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="mt-3 flex items-center gap-1 text-xs font-semibold tracking-[0.1em] uppercase text-aubergine/60 hover:text-aubergine transition-colors"
+              className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.15em] uppercase text-warm-white/40 hover:text-champagne transition-colors"
             >
-              {showAll ? 'Show less' : `+${program.includes.length - 4} more`}
+              {showAll ? 'Show less' : `+${program.includes.length - 4} more included`}
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showAll ? 'rotate-180' : ''}`} />
             </button>
           )}
         </div>
 
-        {/* Payment toggle */}
-        <div className="border-t border-blush pt-5 mb-5">
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-charcoal/50 mb-3">
-            Payment option
-          </p>
-          <div className="grid grid-cols-2 gap-2 mb-3">
+        {/* ── Payment block ── */}
+        <div className="border-t border-white/10 pt-6">
+          {/* Segmented toggle */}
+          <div className="flex bg-plum/50 mb-6">
             {(['full', 'plan'] as PaymentType[]).map((type) => {
               const active = paymentType === type;
               return (
                 <button
                   key={type}
                   onClick={() => setPaymentType(type)}
-                  className={`px-3 py-3 text-left text-sm transition-all border ${
+                  className={`flex-1 py-2.5 text-[10px] font-bold tracking-[0.2em] uppercase transition-all ${
                     active
-                      ? 'border-aubergine bg-aubergine text-warm-white'
-                      : 'border-blush bg-transparent text-charcoal hover:border-aubergine/40'
+                      ? 'bg-champagne text-aubergine'
+                      : 'text-warm-white/40 hover:text-warm-white/70'
                   }`}
                 >
-                  <div className={`text-[10px] uppercase tracking-widest mb-1 ${active ? 'text-champagne' : 'text-charcoal/50'}`}>
-                    {type === 'full' ? 'Pay in full' : 'Payment plan'}
-                  </div>
-                  <div className="font-semibold">
-                    {type === 'full'
-                      ? fmt(program.fullPrice)
-                      : `${fmt(program.planAmount)}/${periodAbbr}`}
-                  </div>
+                  {type === 'full' ? 'Pay in full' : 'Payment plan'}
                 </button>
               );
             })}
           </div>
-          <p className="text-xs text-charcoal/45 leading-relaxed">
-            {paymentType === 'full'
-              ? `Save ${fmt(program.planTotal - program.fullPrice)} compared with the payment plan.`
-              : `${program.planCount} payments. Total payable ${fmt(program.planTotal)}.`}
-          </p>
-        </div>
 
-        {/* CTA */}
-        <Button
-          onClick={handleSelect}
-          className={`w-full rounded-none text-xs font-bold tracking-[0.2em] uppercase h-13 border-none transition-all ${
-            isSelected
-              ? 'bg-plum hover:bg-plum/90 text-warm-white'
-              : 'bg-champagne hover:bg-champagne/90 text-aubergine'
-          }`}
-        >
-          {isSelected ? '✓ Selected — View in cart' : 'Select this program'}
-        </Button>
+          {/* Price display */}
+          <div className="flex items-end gap-2 mb-1">
+            <span className="font-serif italic text-warm-white text-[2.4rem] leading-none">
+              {paymentType === 'full'
+                ? fmt(program.fullPrice)
+                : fmt(program.planAmount)}
+            </span>
+            {paymentType === 'plan' && (
+              <span className="text-warm-white/40 text-sm mb-1.5">/{periodAbbr}</span>
+            )}
+          </div>
+          <p className="text-warm-white/35 text-xs mb-7 leading-relaxed">
+            {paymentType === 'full'
+              ? `Save ${fmt(saving)} compared with the payment plan · AUD`
+              : `${program.planCount} payments · Total ${fmt(program.planTotal)} AUD`}
+          </p>
+
+          {/* CTA */}
+          <button
+            onClick={handleSelect}
+            className={`w-full py-4 text-xs font-bold tracking-[0.22em] uppercase transition-all ${
+              isSelected
+                ? 'bg-plum text-warm-white hover:bg-plum/80'
+                : 'bg-champagne text-aubergine hover:bg-champagne/90'
+            }`}
+          >
+            {isSelected ? '✓ Selected — View in cart' : 'Select this program'}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -477,10 +507,10 @@ export default function Programs() {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             {PROGRAMS.map((program) => (
               <FadeIn key={program.id}>
-                <ProgramCard program={program} />
+                <ProgramCard program={program} featured={program.id === 'signature'} />
               </FadeIn>
             ))}
           </div>
