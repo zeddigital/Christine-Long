@@ -94,9 +94,19 @@ export default function WorkWithChristine() {
               <p className="text-warm-white/70 text-lg leading-relaxed mb-6">
                 Designed for individuals ready to address the underlying barriers affecting their confidence, direction, or wellbeing.
               </p>
-              <p className="text-warm-white/70 leading-relaxed mb-12">
+              <p className="text-warm-white/70 leading-relaxed mb-10">
                 Often, we try to solve internal challenges with external solutions — changing jobs, moving house, adopting new routines. When the root pattern remains unaddressed, the same feelings eventually return.
               </p>
+
+              <div className="mb-12">
+                <h3 className="font-serif text-xl text-champagne mb-6">The Format</h3>
+                <div className="space-y-4 text-warm-white/70 text-sm leading-relaxed">
+                  <p><strong className="text-warm-white font-medium">Initial Consultation</strong> — A comprehensive session to uncover the core issue and determine the path forward.</p>
+                  <p><strong className="text-warm-white font-medium">Ongoing Sessions</strong> — Structured to build momentum, usually spaced to allow for integration.</p>
+                  <p><strong className="text-warm-white font-medium">Location</strong> — In person in Melbourne, or online via Zoom across Australia.</p>
+                </div>
+              </div>
+
               <Link href="/contact">
                 <Button className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8 h-12">
                   Enquire About Sessions
@@ -126,15 +136,6 @@ export default function WorkWithChristine() {
                     <p className="text-warm-white/80">{item}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-10 pt-10 border-t border-white/10">
-                <h3 className="font-serif text-xl text-champagne mb-6">The Format</h3>
-                <div className="space-y-4 text-warm-white/70 text-sm leading-relaxed">
-                  <p><strong className="text-warm-white font-medium">Initial Consultation</strong> — A comprehensive session to uncover the core issue and determine the path forward.</p>
-                  <p><strong className="text-warm-white font-medium">Ongoing Sessions</strong> — Structured to build momentum, usually spaced to allow for integration.</p>
-                  <p><strong className="text-warm-white font-medium">Location</strong> — In person in Melbourne, or online via Zoom across Australia.</p>
-                </div>
               </div>
             </FadeIn>
           </div>
