@@ -201,6 +201,10 @@
     outline-color: hsl(38 45% 60%); /* champagne ~6.7:1 on aubergine */
   }
 
+  a, button, [role="button"] {
+    cursor: pointer;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif text-primary;
   }
