@@ -545,7 +545,7 @@ export default function Programs() {
           )}
 
           {/* Pricing note */}
-          <FadeIn className="mt-8 max-w-5xl mx-auto">
+          <FadeIn className="mt-4 max-w-5xl mx-auto">
             <p className="text-xs text-charcoal/40 text-center leading-relaxed">
               All prices AUD. Payment-plan totals are higher than the one-time rate — totals are shown in each card. 
               Professional-development expenses may be deductible; please seek advice from your accountant.
