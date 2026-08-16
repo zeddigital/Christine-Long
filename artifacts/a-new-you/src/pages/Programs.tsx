@@ -410,7 +410,7 @@ export default function Programs() {
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <div className="space-y-0">
+              <div className="space-y-1">
                 {[
                   'Overthink important decisions or second-guess yourself',
                   'Carry too much because delegating or trusting others feels difficult',
@@ -420,8 +420,8 @@ export default function Programs() {
                   'Feel successful on the outside but unsettled or disconnected within',
                   'Sense a new season calling, but cannot see the next step clearly',
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 py-4 border-b border-blush last:border-0">
-                    <div className="w-8 h-px bg-champagne flex-shrink-0 mt-[0.6em]" />
+                  <div key={i} className="flex items-start gap-4 py-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-champagne flex-shrink-0 mt-[0.45em]" aria-hidden="true" />
                     <p className="text-charcoal leading-relaxed text-sm">{item}</p>
                   </div>
                 ))}
