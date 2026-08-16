@@ -2,103 +2,118 @@ import { Link } from 'wouter';
 import { Layout } from '@/components/layout/Layout';
 import { FadeIn } from '@/components/ui/fade-in';
 import { Button } from '@/components/ui/button';
-import { Quote } from 'lucide-react';
 
 export default function ClientStories() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="bg-porcelain pt-20 pb-16 md:pt-32 md:pb-24">
-        <div className="container mx-auto px-4 md:px-8 max-w-4xl text-center">
+
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      <section className="bg-aubergine -mt-20 pt-40 pb-28 md:pt-52 md:pb-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
           <FadeIn>
-            <h1 className="mb-6">Stories of change</h1>
-            <p className="text-xl text-charcoal leading-relaxed max-w-2xl mx-auto">
-              Read how established individuals have worked with Christine to resolve underlying patterns, reclaim clarity, and create meaningful momentum.
-            </p>
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-8 block">
+              Client Stories
+            </span>
+            <h1 className="font-serif italic text-warm-white text-[2.8rem] sm:text-[3.5rem] lg:text-[4.5rem] leading-[1.05] max-w-3xl mb-10">
+              Words from the people who have done the work.
+            </h1>
+            <div className="w-10 h-px bg-champagne/50" />
           </FadeIn>
         </div>
       </section>
 
-      {/* Stories */}
-      <section className="bg-blush py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-5xl">
-          
-          {/* Leadership */}
-          <div className="mb-20">
+      {/* ── LEADERSHIP & BUSINESS ────────────────────────────────────────── */}
+      <section className="bg-plum py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <FadeIn className="mb-20">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+              Leadership & Business
+            </span>
+            <div className="w-8 h-px bg-champagne/40" />
+          </FadeIn>
+
+          <div className="space-y-20">
             <FadeIn>
-              <h2 className="mb-10 text-center text-3xl">Leadership & Business</h2>
+              <blockquote className="font-serif italic text-warm-white text-2xl md:text-3xl lg:text-4xl leading-tight max-w-4xl mb-8">
+                "I had spent years in personal development and understood myself well — or so I thought. Christine helped me see a pattern I had completely missed. Within a few sessions I made a decision I had been avoiding for two years."
+              </blockquote>
+              <cite className="block font-sans font-medium text-champagne not-italic text-sm tracking-[0.15em] uppercase">
+                S.M. — Business Owner, Melbourne
+              </cite>
+              <p className="text-warm-white/40 text-xs tracking-[0.2em] uppercase mt-3">[Placeholder pending permission]</p>
             </FadeIn>
-            <div className="space-y-8">
-              <FadeIn className="bg-warm-white p-10 md:p-12 rounded-xl shadow-sm border border-black/[0.02] relative">
-                <Quote className="w-10 h-10 text-champagne/30 absolute top-8 left-8" />
-                <blockquote className="font-serif italic text-xl md:text-2xl text-aubergine leading-relaxed mb-6 pt-6 relative z-10">
-                  "I had spent years in personal development and understood myself well — or so I thought. Christine helped me see a pattern I had completely missed. Within a few sessions I made a decision I had been avoiding for two years. The difference in how I approach my business now is tangible."
-                </blockquote>
-                <cite className="block font-sans font-medium text-plum not-italic">
-                  — S.M., Business Owner, Melbourne
-                </cite>
-                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
-              </FadeIn>
 
-              <FadeIn delay={0.1} className="bg-warm-white p-10 md:p-12 rounded-xl shadow-sm border border-black/[0.02] relative">
-                <blockquote className="font-serif italic text-xl text-aubergine leading-relaxed mb-6">
-                  "Working with Christine is completely different from traditional coaching. She doesn't just ask questions—she has an incredible ability to pinpoint exactly where the blockage is and help you clear it quickly. It fundamentally changed how I run my team."
-                </blockquote>
-                <cite className="block font-sans font-medium text-plum not-italic">
-                  — A.L., Senior Executive
-                </cite>
-                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
-              </FadeIn>
-            </div>
-          </div>
+            <div className="w-full h-px bg-white/10" />
 
-          {/* Personal */}
-          <div className="mb-20">
             <FadeIn>
-              <h2 className="mb-10 text-center text-3xl">Personal Transformation</h2>
+              <blockquote className="font-serif italic text-warm-white text-2xl md:text-3xl lg:text-4xl leading-tight max-w-4xl mb-8">
+                "Working with Christine is completely different from traditional coaching. She doesn't just ask questions — she has an incredible ability to pinpoint exactly where the blockage is and help you clear it quickly."
+              </blockquote>
+              <cite className="block font-sans font-medium text-champagne not-italic text-sm tracking-[0.15em] uppercase">
+                A.L. — Senior Executive
+              </cite>
+              <p className="text-warm-white/40 text-xs tracking-[0.2em] uppercase mt-3">[Placeholder pending permission]</p>
             </FadeIn>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <FadeIn className="bg-warm-white p-10 rounded-xl shadow-sm border border-black/[0.02]">
-                <blockquote className="font-serif italic text-xl text-aubergine leading-relaxed mb-6">
-                  "The insight I gained in our very first session completely shifted my perspective. I had been carrying a huge amount of unnecessary pressure for decades."
-                </blockquote>
-                <cite className="block font-sans font-medium text-plum not-italic">
-                  — K.T.
-                </cite>
-                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
-              </FadeIn>
-
-              <FadeIn delay={0.1} className="bg-warm-white p-10 rounded-xl shadow-sm border border-black/[0.02]">
-                <blockquote className="font-serif italic text-xl text-aubergine leading-relaxed mb-6">
-                  "A rare ability to cut through the noise and get straight to the heart of the issue. I feel lighter, clearer, and much more confident in my path forward."
-                </blockquote>
-                <cite className="block font-sans font-medium text-plum not-italic">
-                  — J.R.
-                </cite>
-                <div className="mt-4 text-xs font-medium text-plum uppercase tracking-widest">[Placeholder pending permission]</div>
-              </FadeIn>
-            </div>
           </div>
-
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-porcelain py-20 md:py-32 text-center">
-        <div className="container mx-auto px-4 max-w-3xl">
+      {/* ── PERSONAL TRANSFORMATION ──────────────────────────────────────── */}
+      <section className="bg-porcelain py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <FadeIn className="mb-20">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+              Personal Transformation
+            </span>
+            <div className="w-8 h-px bg-champagne" />
+          </FadeIn>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            <FadeIn>
+              <blockquote className="font-serif italic text-aubergine text-2xl md:text-3xl leading-tight mb-8">
+                "The insight I gained in our very first session completely shifted my perspective. I had been carrying a huge amount of unnecessary pressure for decades."
+              </blockquote>
+              <cite className="block font-sans font-medium text-plum not-italic text-sm tracking-[0.15em] uppercase">
+                K.T.
+              </cite>
+              <p className="text-charcoal/50 text-xs tracking-[0.2em] uppercase mt-3">[Placeholder pending permission]</p>
+            </FadeIn>
+
+            <FadeIn delay={0.15}>
+              <blockquote className="font-serif italic text-aubergine text-2xl md:text-3xl leading-tight mb-8">
+                "A rare ability to cut through the noise and get straight to the heart of the issue. I feel lighter, clearer, and much more confident in my path forward."
+              </blockquote>
+              <cite className="block font-sans font-medium text-plum not-italic text-sm tracking-[0.15em] uppercase">
+                J.R.
+              </cite>
+              <p className="text-charcoal/50 text-xs tracking-[0.2em] uppercase mt-3">[Placeholder pending permission]</p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className="bg-aubergine py-24 md:py-36 text-center">
+        <div className="container mx-auto px-8 max-w-3xl">
           <FadeIn>
-            <h2 className="mb-6">Experience the shift for yourself</h2>
-            <p className="text-charcoal text-lg mb-10 leading-relaxed">
-              If you resonate with these stories and are ready to address the patterns holding you back, the first step is a simple conversation.
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-8 block">
+              Begin here
+            </span>
+            <h2 className="font-serif italic text-warm-white text-4xl md:text-5xl leading-tight mb-10">
+              Experience the shift for yourself.
+            </h2>
+            <p className="text-warm-white/70 text-xl leading-relaxed mb-12 max-w-xl mx-auto">
+              If you resonate with these stories, the first step is a simple conversation.
             </p>
             <Link href="/contact">
-              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-10 h-14">
+              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-12 h-14">
                 Book Your Clarity Call
               </Button>
             </Link>
           </FadeIn>
         </div>
       </section>
+
     </Layout>
   );
 }

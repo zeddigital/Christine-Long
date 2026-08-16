@@ -3,117 +3,182 @@ import { Layout } from '@/components/layout/Layout';
 import { FadeIn } from '@/components/ui/fade-in';
 import { Button } from '@/components/ui/button';
 
-import aboutPortrait from '@assets/Christine_Hero_1786696065293.webp';
+import heroPortrait from '@assets/Christine_Hero_1786696065293.webp';
+import programsPortrait from '@assets/CHRISTINE-PROGRAMS-RESIZED_1786696072425.jpg';
 
 export default function About() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="bg-porcelain py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-            <div className="w-full md:w-1/2 order-2 md:order-1">
-              <FadeIn>
-                <h1 className="mb-8">More than three decades helping people see what others miss</h1>
-                <p className="text-xl text-charcoal leading-relaxed mb-6">
+
+      {/* ── HERO — split aubergine / photo ───────────────────────────────── */}
+      <section className="relative flex flex-col lg:flex-row -mt-20">
+        <div className="relative order-1 lg:order-2 lg:w-[45%] aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[80vh] flex-shrink-0">
+          <img
+            src={heroPortrait}
+            alt="Christine M Long"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+        </div>
+        <div className="bg-aubergine flex items-center order-2 lg:order-1 lg:w-[55%]">
+          <div className="px-8 sm:px-12 lg:px-16 xl:px-24 pt-28 pb-20 lg:pt-40 lg:pb-32 w-full">
+            <div className="lg:max-w-xl xl:max-w-2xl ml-auto">
+              <FadeIn delay={0.1}>
+                <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-8 block">
+                  About Christine
+                </span>
+              </FadeIn>
+              <FadeIn delay={0.2}>
+                <h1 className="font-serif italic text-warm-white text-[2.4rem] sm:text-[3rem] lg:text-[3.6rem] xl:text-[4.2rem] leading-[1.08] mb-10">
+                  More than three decades helping people see what others miss.
+                </h1>
+              </FadeIn>
+              <FadeIn delay={0.3}>
+                <div className="w-10 h-px bg-champagne/50 mb-10" />
+                <p className="text-warm-white/70 text-lg leading-relaxed">
                   Christine M Long is the founder of A New You. Since 1989, she has worked with intelligent, established individuals to resolve the deep patterns that restrict their potential.
                 </p>
-                <p className="text-charcoal leading-relaxed">
-                  Her work sits at the intersection of personal transformation, leadership clarity and wellbeing.
-                </p>
-              </FadeIn>
-            </div>
-            <div className="w-full md:w-1/2 order-1 md:order-2">
-              <FadeIn direction="left">
-                <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-xl max-w-md mx-auto">
-                  <img src={aboutPortrait} alt="Christine M Long" className="w-full h-full object-cover" />
-                </div>
               </FadeIn>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Distinctive Strength & Story */}
-      <section className="bg-blush py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-4xl">
-          <div className="space-y-16">
+      {/* ── DISTINCTIVE STRENGTH ─────────────────────────────────────────── */}
+      <section className="bg-porcelain py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <FadeIn className="mb-20">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+              Her approach
+            </span>
+            <h2 className="font-serif italic text-aubergine text-3xl md:text-4xl lg:text-5xl leading-tight max-w-3xl">
+              Listening beyond the obvious.
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <FadeIn>
-              <h2 className="mb-6">Christine's distinctive strength</h2>
-              <p className="text-charcoal text-lg leading-relaxed">
-                Her strength lies in listening beyond the obvious. Christine has an uncommon ability to quickly identify the thread connecting a client's seemingly unrelated challenges. Whether you are dealing with a business bottleneck or a personal transition, she helps you locate the root pattern and work with it directly, saving months of unnecessary struggle.
+              <p className="text-charcoal text-xl leading-relaxed mb-8">
+                Christine has an uncommon ability to quickly identify the thread connecting a client's seemingly unrelated challenges.
+              </p>
+              <p className="text-charcoal leading-relaxed">
+                Whether you are dealing with a business bottleneck or a personal transition, she helps you locate the root pattern and work with it directly — saving months of unnecessary struggle.
               </p>
             </FadeIn>
-
-            <FadeIn>
-              <h2 className="mb-6">The founding of A New You</h2>
-              <p className="text-charcoal text-lg leading-relaxed mb-6">
-                Christine established A New You in 1989. Over more than 35 years in practice, she has observed firsthand why some people achieve lasting change while others find themselves continually addressing the same issues.
-              </p>
-              <p className="text-charcoal text-lg leading-relaxed">
-                Her approach developed out of a recognition that standard coaching or therapy often addresses the symptoms without shifting the underlying driver. She sought to create a more efficient, profound way of working that creates practical momentum for her clients.
-              </p>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* Qualifications */}
-      <section className="bg-aubergine text-warm-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-4xl">
-          <FadeIn>
-            <h2 className="text-warm-white mb-10 text-center">Qualifications & Methodologies</h2>
-            <div className="bg-white/5 border border-white/10 p-10 rounded-xl mb-6">
-              <div className="text-champagne font-medium text-sm mb-6 uppercase tracking-widest">[Placeholder - Verify Before Publication]</div>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-warm-white/90">
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-rose"></div>
-                  Creator of Core Issue Elimination
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-rose"></div>
-                  Creator of Inner Insight Mastery
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-rose"></div>
-                  Co-author of 'Align, Expand and Succeed'
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-rose"></div>
-                  Advanced Practitioner of Kinesiology
-                </li>
+            <FadeIn delay={0.15}>
+              <div className="w-8 h-px bg-champagne mb-8" />
+              <h3 className="font-serif text-2xl text-aubergine mb-6">Her work sits at the intersection of</h3>
+              <ul className="space-y-4 text-charcoal">
+                {['Personal transformation', 'Leadership clarity', 'Wellbeing & sustained performance'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-4">
+                    <span className="w-1.5 h-1.5 rounded-full bg-champagne shrink-0" />
+                    {item}
+                  </li>
+                ))}
               </ul>
-            </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE FOUNDING ─────────────────────────────────────────────────── */}
+      <section className="bg-aubergine py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <FadeIn>
+              <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+                Founded 1989
+              </span>
+              <h2 className="font-serif italic text-warm-white text-3xl md:text-4xl lg:text-5xl leading-tight mb-10">
+                The founding of A New You.
+              </h2>
+              <p className="text-warm-white/70 text-lg leading-relaxed mb-6">
+                Over more than 35 years in practice, Christine has observed firsthand why some people achieve lasting change while others find themselves continually addressing the same issues.
+              </p>
+              <p className="text-warm-white/70 leading-relaxed">
+                Her approach developed out of a recognition that standard coaching or therapy often addresses the symptoms without shifting the underlying driver. She sought to create a more efficient, profound way of working.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.2} direction="left">
+              <div className="relative">
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={programsPortrait}
+                    alt="Christine M Long — programs"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── QUALIFICATIONS ───────────────────────────────────────────────── */}
+      <section className="bg-porcelain py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <FadeIn className="mb-16">
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+              Qualifications & methodologies
+            </span>
+            <h2 className="font-serif italic text-aubergine text-3xl md:text-4xl leading-tight max-w-2xl">
+              35+ years of expertise, formally and independently developed.
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-blush">
+            {[
+              'Creator of Core Issue Elimination',
+              'Creator of Inner Insight Mastery',
+              'Co-author of Align, Expand and Succeed',
+              'Advanced Practitioner of Kinesiology',
+            ].map((item, i) => (
+              <FadeIn key={i} delay={0.08 * i} className="py-8 md:px-10 first:md:pl-0 last:md:pr-0">
+                <div className="font-serif italic text-[3rem] leading-none text-champagne mb-4 select-none" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </div>
+                <p className="text-charcoal">{item}</p>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn className="mt-10">
+            <p className="text-xs text-charcoal tracking-[0.2em] uppercase">[Verify all credentials before publication]</p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Experience & Locations */}
-      <section className="bg-porcelain py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+      {/* ── WHAT IT'S LIKE ───────────────────────────────────────────────── */}
+      <section className="bg-plum py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <FadeIn>
-              <h2 className="mb-6">What it is like to work with her</h2>
-              <p className="text-charcoal leading-relaxed mb-6">
-                Clients describe Christine as an experienced, calm guide who has heard it all and can take you straight to what matters. The environment she creates is unhurried, intelligent, and completely non-judgmental.
+              <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+                The experience
+              </span>
+              <h2 className="font-serif italic text-warm-white text-3xl md:text-4xl leading-tight mb-10">
+                What it is like to work with her.
+              </h2>
+              <p className="text-warm-white/70 text-lg leading-relaxed mb-6">
+                Clients describe Christine as an experienced, calm guide who has heard it all and can take you straight to what matters.
               </p>
-              <p className="text-charcoal leading-relaxed">
-                She is warm but never soft. She won't waste your time with platitudes; she is there to help you create genuine, workable change.
+              <p className="text-warm-white/70 leading-relaxed">
+                She is warm but never soft. She won't waste your time with platitudes — she is there to help you create genuine, workable change.
               </p>
             </FadeIn>
-            
-            <FadeIn delay={0.2} className="bg-warm-white p-10 rounded-xl shadow-sm border border-black/[0.03]">
-              <h3 className="font-serif text-2xl text-aubergine mb-6">Locations</h3>
-              <div className="space-y-6">
+
+            <FadeIn delay={0.2}>
+              <div className="w-8 h-px bg-champagne/50 mb-10" />
+              <div className="space-y-10">
                 <div>
-                  <h4 className="font-medium text-plum mb-2">Melbourne (In Person)</h4>
-                  <p className="text-charcoal text-sm leading-relaxed">
+                  <h3 className="font-serif text-xl text-champagne mb-3">Melbourne — In Person</h3>
+                  <p className="text-warm-white/70 leading-relaxed text-sm">
                     Consultations are available in a beautifully appointed, private consulting room. Tactile, composed, and quietly confident.
                   </p>
                 </div>
+                <div className="w-8 h-px bg-white/10" />
                 <div>
-                  <h4 className="font-medium text-plum mb-2">Online (Australia-wide)</h4>
-                  <p className="text-charcoal text-sm leading-relaxed">
+                  <h3 className="font-serif text-xl text-champagne mb-3">Online — Australia-wide</h3>
+                  <p className="text-warm-white/70 leading-relaxed text-sm">
                     Christine works extensively with clients across Australia via Zoom. The methodology translates perfectly to the online environment.
                   </p>
                 </div>
@@ -123,19 +188,25 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-blush py-20 text-center">
-        <div className="container mx-auto px-4 max-w-3xl">
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className="bg-porcelain py-24 md:py-32 text-center">
+        <div className="container mx-auto px-8 max-w-3xl">
           <FadeIn>
-            <h2 className="mb-8">Start with a conversation</h2>
+            <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-8 block">
+              Begin here
+            </span>
+            <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl leading-tight mb-10">
+              Start with a conversation.
+            </h2>
             <Link href="/contact">
-              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-[11px] font-bold tracking-[0.2em] uppercase px-10 h-14">
+              <Button size="lg" className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-12 h-14">
                 Book a Clarity Call
               </Button>
             </Link>
           </FadeIn>
         </div>
       </section>
+
     </Layout>
   );
 }

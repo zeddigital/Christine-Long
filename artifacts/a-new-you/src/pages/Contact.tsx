@@ -25,13 +25,7 @@ export default function Contact() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      message: '',
-    },
+    defaultValues: { firstName: '', lastName: '', email: '', phone: '', message: '' },
   });
 
   function onSubmit(data: FormValues) {
@@ -41,71 +35,85 @@ export default function Contact() {
 
   return (
     <Layout>
-      <section className="bg-porcelain py-20 md:py-32 min-h-[calc(100vh-80px)] flex flex-col justify-center">
-        <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
-            {/* Left Column */}
-            <div>
-              <FadeIn>
-                <h1 className="mb-6 text-4xl md:text-5xl">Start with a private conversation</h1>
-                <p className="text-xl text-charcoal leading-relaxed mb-10">
-                  Begin with a complimentary 20-minute Clarity Call to discuss where you are and what support may fit.
-                </p>
+      {/* ── HERO + FORM — split aubergine / porcelain ─────────────────────── */}
+      <section className="relative flex flex-col lg:flex-row -mt-20 min-h-[calc(100vh-0px)]">
 
-                <div className="space-y-8">
-                  <div>
-                    <h3 className="font-serif text-2xl text-aubergine mb-3">What happens next</h3>
-                    <p className="text-charcoal leading-relaxed">
-                      After submitting the form, Christine will be in touch via email to arrange a suitable time for your call.
-                    </p>
-                  </div>
+        {/* Left — aubergine editorial panel */}
+        <div className="bg-aubergine lg:w-[45%] flex items-start order-2 lg:order-1">
+          <div className="px-8 sm:px-12 lg:px-16 xl:px-20 pt-28 pb-20 lg:pt-40 lg:pb-32 w-full">
+            <FadeIn>
+              <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-8 block">
+                Contact
+              </span>
+              <h1 className="font-serif italic text-warm-white text-[2.4rem] sm:text-[3rem] lg:text-[3.5rem] leading-[1.08] mb-10">
+                Start with a private conversation.
+              </h1>
+              <p className="text-warm-white/70 text-lg leading-relaxed mb-14">
+                Begin with a complimentary 20-minute Clarity Call to discuss where you are and what support may fit.
+              </p>
 
-                  <div className="w-8 h-px bg-champagne"></div>
-
-                  <div>
-                    <h3 className="font-serif text-xl text-aubergine mb-3">Direct Contact</h3>
-                    <p className="text-charcoal leading-relaxed">
-                      <a href="tel:0409140173" className="hover:text-aubergine transition-colors font-medium underline underline-offset-2">0409 140 173</a><br />
-                      <a href="mailto:hello@anewyou.com.au" className="hover:text-aubergine transition-colors font-medium underline underline-offset-2">hello@anewyou.com.au</a>
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="font-serif text-xl text-aubergine mb-3">Locations</h3>
-                    <p className="text-charcoal leading-relaxed">
-                      In person: Melbourne, VIC<br />
-                      Online: Australia-wide via Zoom
-                    </p>
-                  </div>
-
-                  {/* Confidentiality note — was text-charcoal/60 (3.98:1 FAIL); now text-charcoal */}
-                  <p className="text-sm text-charcoal pt-4">
-                    All enquiries are treated with the strictest confidence.
+              <div className="space-y-10">
+                <div>
+                  <div className="w-8 h-px bg-champagne/40 mb-8" />
+                  <h3 className="font-serif text-xl text-champagne mb-3">What happens next</h3>
+                  <p className="text-warm-white/65 leading-relaxed text-sm">
+                    After submitting the form, Christine will be in touch via email to arrange a suitable time for your call.
                   </p>
                 </div>
-              </FadeIn>
-            </div>
+                <div>
+                  <h3 className="font-serif text-xl text-champagne mb-3">Direct Contact</h3>
+                  <p className="text-warm-white/65 leading-relaxed text-sm">
+                    <a href="tel:0409140173" className="hover:text-champagne transition-colors underline underline-offset-2">0409 140 173</a><br />
+                    <a href="mailto:hello@anewyou.com.au" className="hover:text-champagne transition-colors underline underline-offset-2">hello@anewyou.com.au</a>
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl text-champagne mb-3">Locations</h3>
+                  <p className="text-warm-white/65 leading-relaxed text-sm">
+                    In person: Melbourne, VIC<br />
+                    Online: Australia-wide via Zoom
+                  </p>
+                </div>
+              </div>
 
-            {/* Right Column */}
-            <div>
-              <FadeIn direction="left" delay={0.2} className="bg-warm-white p-8 md:p-10 rounded-xl shadow-sm border border-black/[0.03]">
-                {isSubmitted ? (
-                  <div className="text-center py-12">
-                    <CheckCircle2 className="w-16 h-16 text-champagne mx-auto mb-6" aria-hidden="true" />
-                    <h3 className="font-serif text-3xl text-aubergine mb-4">Request Received</h3>
-                    <p className="text-charcoal leading-relaxed mb-8">
-                      Thank you for reaching out. Christine will be in touch shortly to arrange your Clarity Call.
-                    </p>
-                    <Button
-                      variant="outline"
-                      onClick={() => setIsSubmitted(false)}
-                      className="border-aubergine/40 text-aubergine hover:bg-aubergine/5 rounded"
-                    >
-                      Send another message
-                    </Button>
+              <p className="text-warm-white/50 text-xs mt-14">
+                All enquiries are treated with the strictest confidence.
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+
+        {/* Right — form */}
+        <div className="bg-porcelain lg:w-[55%] flex items-center order-1 lg:order-2">
+          <div className="px-8 sm:px-12 lg:px-16 xl:px-20 pt-28 pb-20 lg:pt-40 lg:pb-32 w-full max-w-2xl">
+            <FadeIn delay={0.15}>
+              {isSubmitted ? (
+                <div className="text-center py-16">
+                  <CheckCircle2 className="w-16 h-16 text-champagne mx-auto mb-6" aria-hidden="true" />
+                  <h2 className="font-serif italic text-aubergine text-4xl mb-4">Request Received</h2>
+                  <p className="text-charcoal leading-relaxed mb-10">
+                    Thank you for reaching out. Christine will be in touch shortly to arrange your Clarity Call.
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsSubmitted(false)}
+                    className="border-aubergine/40 text-aubergine hover:bg-aubergine/5 rounded-none text-xs font-semibold tracking-[0.15em] uppercase"
+                  >
+                    Send another message
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-10">
+                    <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-4 block">
+                      Clarity Call Request
+                    </span>
+                    <h2 className="font-serif italic text-aubergine text-3xl md:text-4xl leading-tight">
+                      Tell Christine a little about yourself.
+                    </h2>
                   </div>
-                ) : (
+
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
                       <div className="grid grid-cols-2 gap-4">
@@ -114,17 +122,14 @@ export default function Contact() {
                           name="firstName"
                           render={({ field }) => (
                             <FormItem>
-                              {/* Label contrast: text-charcoal on warm-white ~15:1 ✅ */}
                               <FormLabel className="text-charcoal font-medium">First name</FormLabel>
                               <FormControl>
-                                {/* border-aubergine/50 ~3.07:1 against porcelain — passes SC 1.4.11 */}
                                 <Input
                                   placeholder="First name"
                                   {...field}
-                                  className="bg-porcelain border-aubergine/50 focus-visible:ring-aubergine rounded-md"
+                                  className="bg-warm-white border-aubergine/50 focus-visible:ring-aubergine rounded-none"
                                 />
                               </FormControl>
-                              {/* Error text uses --destructive (dark red ~8:1 on white) ✅ */}
                               <FormMessage />
                             </FormItem>
                           )}
@@ -139,7 +144,7 @@ export default function Contact() {
                                 <Input
                                   placeholder="Last name"
                                   {...field}
-                                  className="bg-porcelain border-aubergine/50 focus-visible:ring-aubergine rounded-md"
+                                  className="bg-warm-white border-aubergine/50 focus-visible:ring-aubergine rounded-none"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -158,7 +163,7 @@ export default function Contact() {
                                 type="email"
                                 placeholder="Your email address"
                                 {...field}
-                                className="bg-porcelain border-aubergine/50 focus-visible:ring-aubergine rounded-md"
+                                className="bg-warm-white border-aubergine/50 focus-visible:ring-aubergine rounded-none"
                               />
                             </FormControl>
                             <FormMessage />
@@ -170,13 +175,15 @@ export default function Contact() {
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-charcoal font-medium">Phone number <span className="font-normal text-charcoal/70">(optional)</span></FormLabel>
+                            <FormLabel className="text-charcoal font-medium">
+                              Phone number <span className="font-normal text-charcoal/70">(optional)</span>
+                            </FormLabel>
                             <FormControl>
                               <Input
                                 type="tel"
                                 placeholder="Your phone number"
                                 {...field}
-                                className="bg-porcelain border-aubergine/50 focus-visible:ring-aubergine rounded-md"
+                                className="bg-warm-white border-aubergine/50 focus-visible:ring-aubergine rounded-none"
                               />
                             </FormControl>
                             <FormMessage />
@@ -192,7 +199,7 @@ export default function Contact() {
                             <FormControl>
                               <Textarea
                                 placeholder="Briefly describe what you are looking to address..."
-                                className="min-h-[120px] bg-porcelain border-aubergine/50 focus-visible:ring-aubergine rounded-md resize-y"
+                                className="min-h-[130px] bg-warm-white border-aubergine/50 focus-visible:ring-aubergine rounded-none resize-y"
                                 {...field}
                               />
                             </FormControl>
@@ -200,21 +207,20 @@ export default function Contact() {
                           </FormItem>
                         )}
                       />
-                      {/* Submit button: champagne/aubergine — text contrast 6.72:1 ✅ */}
                       <Button
                         type="submit"
-                        className="w-full bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase h-12 mt-4"
+                        className="w-full bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase h-14 mt-2"
                       >
                         Request Clarity Call
                       </Button>
                     </form>
                   </Form>
-                )}
-              </FadeIn>
-            </div>
-
+                </>
+              )}
+            </FadeIn>
           </div>
         </div>
+
       </section>
     </Layout>
   );
