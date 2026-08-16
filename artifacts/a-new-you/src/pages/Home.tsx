@@ -414,7 +414,7 @@ export default function Home() {
       </section>
 
       {/* ── FINAL CTA ────────────────────────────────────────────────────── */}
-      <section className="bg-aubergine py-28 md:py-44 text-center">
+      <section className="bg-aubergine py-28 md:py-44 text-center relative">
         <div className="container mx-auto px-8 max-w-3xl">
           <FadeIn>
             <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-10">
@@ -443,6 +443,9 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
+
+      {/* Divider between CTA and footer */}
+      <div className="bg-aubergine"><div className="container mx-auto px-4 md:px-8 max-w-7xl border-t border-warm-white/20" /></div>
 
     </Layout>
   );
