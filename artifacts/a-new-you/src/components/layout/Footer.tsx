@@ -53,10 +53,8 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col items-center gap-4 text-xs text-warm-white/65 text-center">
-          <div>
-            <p>© 2026 Christine Long</p>
-            <p>All rights reserved.</p>
-          </div>
+          <p>© 2026 Christine Long</p>
+          <p>All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/privacy" className="hover:text-warm-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-warm-white transition-colors">Terms</Link>
