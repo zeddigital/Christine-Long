@@ -17,6 +17,8 @@ import About from '@/pages/About';
 import ClientStories from '@/pages/ClientStories';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/not-found';
+import { CartProvider } from '@/context/CartContext';
+import { CartDrawer } from '@/components/cart/CartDrawer';
 
 const queryClient = new QueryClient();
 
@@ -54,10 +56,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
+        <CartProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+            <Router />
+          </WouterRouter>
+          <CartDrawer />
+          <Toaster />
+        </CartProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/context/CartContext';
 
 export function Header() {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { program, openCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +64,20 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
+            {/* Cart icon — shown when a program is selected */}
+            {program && (
+              <button
+                onClick={openCart}
+                aria-label="View selected program"
+                className="relative text-warm-white/70 hover:text-champagne transition-colors"
+              >
+                <ShoppingBag size={20} />
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-champagne text-aubergine text-[9px] font-bold flex items-center justify-center leading-none">
+                  1
+                </span>
+              </button>
+            )}
+
             <Link href="/contact" className="hidden sm:inline-flex">
               <Button className="bg-champagne hover:bg-champagne/90 text-aubergine border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-6 h-10">
                 Book a Clarity Call
