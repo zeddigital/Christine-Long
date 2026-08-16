@@ -100,10 +100,17 @@ export default function WorkWithChristine() {
 
               <div className="mb-12">
                 <h3 className="font-serif text-xl text-champagne mb-6">The Format</h3>
-                <div className="space-y-4 text-warm-white/70 text-sm leading-relaxed">
-                  <p><strong className="text-warm-white font-medium">Initial Consultation</strong> — A comprehensive session to uncover the core issue and determine the path forward.</p>
-                  <p><strong className="text-warm-white font-medium">Ongoing Sessions</strong> — Structured to build momentum, usually spaced to allow for integration.</p>
-                  <p><strong className="text-warm-white font-medium">Location</strong> — In person in Melbourne, or online via Zoom across Australia.</p>
+                <div className="space-y-6 text-sm">
+                  {[
+                    { label: 'Initial Consultation', body: 'A comprehensive session to uncover the core issue and determine the path forward.' },
+                    { label: 'Ongoing Sessions', body: 'Structured to build momentum, usually spaced to allow for integration.' },
+                    { label: 'Location', body: 'In person in Melbourne, or online via Zoom across Australia.' },
+                  ].map(({ label, body }) => (
+                    <div key={label}>
+                      <p className="text-warm-white font-medium mb-1">{label}</p>
+                      <p className="text-warm-white/70 leading-relaxed">{body}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
