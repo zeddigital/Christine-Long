@@ -43,9 +43,11 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="font-serif italic text-xl text-warm-white tracking-wide">
-              A New You
-            </span>
+            <img
+              src="/logo.png"
+              alt="A New You"
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Nav */}
