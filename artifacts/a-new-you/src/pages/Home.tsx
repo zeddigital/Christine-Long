@@ -18,7 +18,7 @@ export default function Home() {
       <section className="relative flex flex-col lg:flex-row min-h-screen -mt-20">
 
         {/* Photo panel — top on mobile, right on desktop */}
-        <div className="relative order-1 lg:order-2 lg:w-[48%] aspect-[4/3] lg:aspect-auto flex-shrink-0">
+        <div className="relative order-1 lg:order-2 lg:w-[48%] aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto flex-shrink-0">
           <img
             src={heroPortrait}
             alt="Christine M Long"
