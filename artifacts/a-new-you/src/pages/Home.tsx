@@ -318,11 +318,9 @@ export default function Home() {
               <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase block mb-8">
                 Featured Program
               </span>
-              <Link href="/programs">
-                <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl mb-6 leading-tight hover:text-plum transition-colors cursor-pointer">
-                  Luminous Break Free
-                </h2>
-              </Link>
+              <h2 className="font-serif italic text-aubergine text-4xl md:text-5xl mb-6 leading-tight">
+                Luminous Break Free
+              </h2>
               <p className="text-charcoal text-xl leading-relaxed mb-12 max-w-2xl">
                 A personalised, structured transformation journey for women ready to move beyond repeating patterns and reclaim clarity and direction.
               </p>
@@ -348,9 +346,9 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Link href="/contact">
+              <Link href="/programs">
                 <Button className="bg-aubergine hover:bg-aubergine/90 text-warm-white border-none rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8 h-12">
-                  Enquire about Availability
+                  View Programs &amp; Pricing
                 </Button>
               </Link>
             </div>
