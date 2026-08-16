@@ -115,7 +115,7 @@ export default function WorkWithChristine() {
             </FadeIn>
 
             <FadeIn delay={0.2} direction="left">
-              <div className="aspect-[4/3] overflow-hidden mb-10">
+              <div className="aspect-[3/4] overflow-hidden mb-10">
                 <img
                   src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80"
                   alt="A woman in a calm, reflective moment"
