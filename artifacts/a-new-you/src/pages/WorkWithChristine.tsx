@@ -105,7 +105,13 @@ export default function WorkWithChristine() {
             </FadeIn>
 
             <FadeIn delay={0.2} direction="left">
-              <div className="w-8 h-px bg-champagne/40 mb-10" />
+              <div className="aspect-[4/3] overflow-hidden mb-10">
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80"
+                  alt="A woman in a calm, reflective moment"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div className="space-y-0">
                 {[
                   'Release persistent negative beliefs and patterns',
@@ -140,7 +146,13 @@ export default function WorkWithChristine() {
         <div className="container mx-auto px-8 md:px-12 max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <FadeIn direction="right" className="order-2 lg:order-1">
-              <div className="w-8 h-px bg-champagne mb-10" />
+              <div className="aspect-[4/3] overflow-hidden mb-10">
+                <img
+                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80"
+                  alt="A professional in a thoughtful moment of leadership clarity"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div className="space-y-0">
                 {[
                   { title: 'Decision Fatigue', body: 'Moving from second-guessing to clear, intuitive decision-making.' },
