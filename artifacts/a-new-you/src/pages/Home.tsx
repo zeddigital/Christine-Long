@@ -224,8 +224,8 @@ export default function Home() {
                     'Creator of Core Issue Elimination and Inner Insight Mastery',
                     'Consultations in person, by phone and online',
                   ].map((cred, idx) => (
-                    <div key={idx} className="flex items-center gap-4">
-                      <div className="w-8 h-px bg-champagne flex-shrink-0" />
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="w-8 h-px bg-champagne flex-shrink-0 mt-[0.6em]" />
                       <span className="text-plum text-base">{cred}</span>
                     </div>
                   ))}
