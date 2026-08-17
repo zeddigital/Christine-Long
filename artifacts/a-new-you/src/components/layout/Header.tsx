@@ -44,7 +44,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <img
-              src="/logo.png"
+              src="/logo-light.png"
               alt="A New You"
               className="h-14 w-auto"
             />

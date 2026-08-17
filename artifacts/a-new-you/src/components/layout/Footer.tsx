@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
-              <span className="font-serif italic text-3xl text-warm-white">A New You</span>
+              <img src="/logo-light.png" alt="A New You" className="h-14 w-auto" />
             </Link>
             <p className="text-warm-white/80 leading-relaxed text-sm">
               Personal and professional transformation with Christine M Long. Founder-CEO guidance since 1989, in person in Melbourne and online across Australia.
