@@ -67,7 +67,7 @@ export default function Home() {
               <FadeIn delay={0.5}>
                 <div className="mt-12 pt-10 border-t border-white/10">
                   <p className="text-warm-white/75 text-xs tracking-[0.25em] uppercase">
-                    35+ years · Melbourne & Online Australia-wide · Founder-led
+                    35+ years · Melbourne & Online Australia-wide · Founder-CEO
                   </p>
                 </div>
               </FadeIn>

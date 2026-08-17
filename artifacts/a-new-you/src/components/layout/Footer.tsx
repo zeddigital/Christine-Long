@@ -10,7 +10,7 @@ export function Footer() {
               <span className="font-serif italic text-3xl text-warm-white">A New You</span>
             </Link>
             <p className="text-warm-white/80 leading-relaxed text-sm">
-              Personal and professional transformation with Christine M Long. Founder-led guidance since 1989, in person in Melbourne and online across Australia.
+              Personal and professional transformation with Christine M Long. Founder-CEO guidance since 1989, in person in Melbourne and online across Australia.
             </p>
           </div>
 
