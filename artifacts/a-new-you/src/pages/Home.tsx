@@ -32,7 +32,7 @@ export default function Home() {
             <div className="lg:max-w-xl xl:max-w-2xl ml-auto">
               <FadeIn delay={0.1}>
                 <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-10 block">
-                  Christine M Long · Transformation Practice
+                  Lead with Clarity. Live with Freedom.
                 </span>
               </FadeIn>
               <FadeIn delay={0.2}>
