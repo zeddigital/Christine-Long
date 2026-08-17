@@ -24,7 +24,7 @@ export default function Home() {
             alt="Christine M Long"
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
-          <div className="absolute bottom-4 right-4 bg-aubergine/80 px-4 py-2">
+          <div className="absolute bottom-0 right-0 bg-aubergine/80 px-4 py-2">
             <span className="text-warm-white text-xs font-semibold tracking-[0.2em] uppercase">Christine M Long</span>
           </div>
         </div>
