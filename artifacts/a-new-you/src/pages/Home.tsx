@@ -223,7 +223,7 @@ export default function Home() {
                 <div className="space-y-5 mb-12">
                   {[
                     'Founder of A New You since 1989',
-                    'Co-author of Align, Expand and Succeed',
+                    'Contributing author in Align, Expand and Succeed',
                     'Creator of Core Issue Elimination and Inner Insight Mastery',
                     'Consultations in person, by phone and online',
                   ].map((cred, idx) => (

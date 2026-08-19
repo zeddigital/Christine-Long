@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 
 import heroPortrait from '@assets/Christine_Hero_1786696065293.webp';
 import programsPortrait from '@assets/CHRISTINE-PROGRAMS-RESIZED_1786696072425.jpg';
+import bookCover from '@assets/Align_Expand_Succeed_Cover_1787114955752.jpg';
 
 export default function About() {
   return (
@@ -113,6 +114,77 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── AUTHOR ────────────────────────────────────────────────────────── */}
+      <section className="bg-plum py-24 md:py-36">
+        <div className="container mx-auto px-8 md:px-12 max-w-5xl">
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-14 lg:gap-24 items-center">
+            <FadeIn direction="right" className="mx-auto lg:mx-0 w-full max-w-[280px]">
+              <a
+                href="https://www.amazon.com/Align-Expand-Succeed-Shifting-entrepreneurial/dp/1934509310"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View Align, Expand and Succeed on Amazon"
+                className="block shadow-2xl transition-transform duration-300 hover:-translate-y-2"
+              >
+                <img
+                  src={bookCover}
+                  alt="Align, Expand and Succeed: Shifting the Paradigm of Entrepreneurial Success"
+                  className="w-full h-auto"
+                />
+              </a>
+            </FadeIn>
+
+            <FadeIn>
+              <span className="text-champagne text-xs font-semibold tracking-[0.3em] uppercase mb-6 block">
+                Author & conscious entrepreneurship
+              </span>
+              <h2 className="font-serif italic text-warm-white text-3xl md:text-4xl lg:text-5xl leading-tight mb-8">
+                Business can be a force for a new world.
+              </h2>
+              <p className="text-warm-white/75 text-lg leading-relaxed mb-6">
+                Christine is a contributing author in <em>Align, Expand and Succeed</em>, a collection of personal stories, practical tools and strategies from conscious entrepreneurs creating meaningful change through business.
+              </p>
+              <p className="text-warm-white/70 leading-relaxed mb-8">
+                The book explores the inner shifts that support outer success, from transforming challenges into opportunities to leading with purpose, making peace with money and releasing what stands between you and your potential.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
+                {[
+                  'Transform challenge into success',
+                  'Thrive as a purposeful leader',
+                  'Make peace with money',
+                  'Release what holds you back',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-champagne shrink-0 mt-2" />
+                    <span className="text-warm-white/75 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <blockquote className="border-l border-champagne/60 pl-5 mb-10">
+                <p className="font-serif italic text-warm-white/85 text-xl leading-relaxed">
+                  “If you want to make a difference in the world through your business, you need to read this book.”
+                </p>
+                <cite className="not-italic text-champagne text-xs tracking-[0.2em] uppercase mt-3 block">
+                  Dr. Ivan Misner, Founder of BNI
+                </cite>
+              </blockquote>
+
+              <a
+                href="https://www.amazon.com/Align-Expand-Succeed-Shifting-entrepreneurial/dp/1934509310"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 bg-champagne text-aubergine hover:bg-champagne/90 rounded-none text-xs font-bold tracking-[0.2em] uppercase px-8 h-12 transition-colors"
+              >
+                Find the book on Amazon
+                <span aria-hidden="true">↗</span>
+              </a>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       {/* ── QUALIFICATIONS ───────────────────────────────────────────────── */}
       <section className="bg-porcelain py-24 md:py-36">
         <div className="container mx-auto px-8 md:px-12 max-w-5xl">
@@ -129,7 +201,7 @@ export default function About() {
             {[
               'Creator of Core Issue Elimination',
               'Creator of Inner Insight Mastery',
-              'Co-author of Align, Expand and Succeed',
+              'Contributing author in Align, Expand and Succeed',
               'Advanced Practitioner of Kinesiology',
             ].map((item, i) => (
               <FadeIn key={i} delay={0.08 * i} className="py-8 md:px-10 first:md:pl-0 last:md:pr-0">
