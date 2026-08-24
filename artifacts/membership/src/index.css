@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+/* A New You — carried across from the rebrand so the member area and the public
+   site read as one property. */
+@theme {
+  /* White does the work; the brand shows up in the header, the headings and the accents.
+     Neutrals carry a slight warm bias so they still belong to A New You rather than
+     reading as generic grey. */
+  --color-page: #ffffff;
+  --color-surface: #ffffff;
+  --color-subtle: #f8f6f3;      /* table headers, quiet fills */
+  --color-porcelain: #f4f0ea;   /* kept for the sign-in screen */
+  --color-warmwhite: #ffffff;
+  --color-blush: #f8f6f3;
+  --color-charcoal: #2b262c;
+  --color-plum: #6b566d;
+  --color-mute: #8d8189;
+  --color-line: #e7e2dc;
+  --color-line-strong: #d5cdc5;
+  --color-aubergine: #2c2130;
+  --color-champagne: #a87f3c;
+  --color-champagne-bright: #c9a25a;
+  --color-rose: #b8705f;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 3px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Christine's lessons arrive as HTML converted out of WordPress. These rules tame
+   what the page builder left behind without editing her content. */
+.lesson-body { font-size: 1.0625rem; line-height: 1.75; color: var(--color-charcoal); }
+.lesson-body > * + * { margin-top: 1rem; }
+.lesson-body h1, .lesson-body h2, .lesson-body h3, .lesson-body h4 {
+  font-family: var(--font-serif); font-weight: 500; line-height: 1.2;
+  color: var(--color-aubergine); margin-top: 2rem; text-wrap: balance;
+}
+.lesson-body h1 { font-size: 1.9rem; }
+.lesson-body h2 { font-size: 1.6rem; }
+.lesson-body h3 { font-size: 1.3rem; }
+.lesson-body p { margin: 0 0 1rem; }
+.lesson-body ul, .lesson-body ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+.lesson-body li { margin-bottom: 0.4rem; }
+.lesson-body a { color: var(--color-rose); text-underline-offset: 2px; }
+.lesson-body img { max-width: 100%; height: auto; border-radius: 3px; }
+.lesson-body strong { color: var(--color-aubergine); }
+.lesson-body hr { border: 0; border-top: 1px solid var(--color-line); margin: 2rem 0; }
+
+/* Buttons the page builder emitted, restyled as links rather than shouty CTAs. */
+.lesson-body a.btn {
+  display: block; padding: 0.75rem 1rem; margin-bottom: 0.5rem;
+  background: var(--color-subtle); border: 1px solid var(--color-line);
+  border-radius: 3px; text-decoration: none; color: var(--color-aubergine);
+  font-size: 0.9rem; font-weight: 600; transition: border-color 0.15s, background 0.15s;
+}
+.lesson-body a.btn:hover { border-color: var(--color-champagne); background: #fff; box-shadow: 0 1px 3px rgba(43,38,44,.06); }
+.lesson-body a[data-unresolved="1"] {
+  opacity: 0.55; pointer-events: none; text-decoration: line-through;
+}
+.lesson-body .video { position: relative; padding-top: 56.25%; margin: 1.5rem 0; border-radius: 3px; overflow: hidden; background: #000; }
+.lesson-body .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.lesson-body audio.track { width: 100%; margin: 1rem 0; }
+.lesson-body .spacer { height: 1rem; }
+.lesson-body table { width: 100%; border-collapse: collapse; }
+.lesson-body .rt > *:first-child { margin-top: 0; }
