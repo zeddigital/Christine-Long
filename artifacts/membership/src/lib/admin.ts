@@ -116,3 +116,84 @@ export async function fetchMemberProgress(memberId: number) {
     lessons: { module_id: number; title: string } | null;
   }[];
 }
+
+/* ------------------------------------------------------------------------- *
+ * Module management
+ * ------------------------------------------------------------------------- */
+
+export interface ModuleRow extends Module {
+  archived_at: string | null;
+  lesson_count: number;
+  members_holding: number;
+}
+
+export async function fetchModuleOverview(): Promise<ModuleRow[]> {
+  const { data, error } = await supabase
+    .from("module_overview")
+    .select("*")
+    .order("sort_order");
+  if (error) throw error;
+  return (data ?? []) as ModuleRow[];
+}
+
+/**
+ * Take a module out of circulation, or put it back.
+ *
+ * Archiving hides the module and everything under it — lessons, sections, worksheets
+ * and audio — because every content policy resolves entitlement through the same
+ * has_module() check. Entitlements are left untouched, so restoring returns access to
+ * exactly the people who had it.
+ */
+export async function setModuleArchived(id: number, archived: boolean) {
+  const { error } = await supabase
+    .from("modules")
+    .update({ archived_at: archived ? new Date().toISOString() : null })
+    .eq("id", id);
+  if (error) throw error;
+}
+
+export async function renameModule(id: number, name: string) {
+  const { error } = await supabase.from("modules").update({ name }).eq("id", id);
+  if (error) throw error;
+}
+
+/**
+ * Permanent. Every foreign key onto modules cascades, so this also destroys the
+ * module's lessons, their sections and media links, and every entitlement to it.
+ * The UI requires the module's name to be typed before calling this.
+ */
+export async function deleteModule(id: number) {
+  const { error } = await supabase.from("modules").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/* ------------------------------------------------------------------------- *
+ * Member management
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Inactive members resolve to no member at all, so they lose every module, any admin
+ * rights and their progress view while their records stay intact. Reactivating returns
+ * them exactly as they were.
+ */
+export async function setMemberStatus(id: number, status: MemberRow["status"]) {
+  const { error } = await supabase.from("members").update({ status }).eq("id", id);
+  if (error) throw error;
+}
+
+/** Runs server-side: deleting a login needs the service key, which stays out of the browser. */
+export async function removeMember(memberId: number) {
+  const { data, error } = await supabase.functions.invoke("remove-member", {
+    body: { member_id: memberId },
+  });
+  if (error) {
+    const detail = await (error as { context?: Response }).context?.json?.().catch(() => null);
+    throw new Error(detail?.error ?? error.message);
+  }
+  return data as {
+    ok: boolean;
+    email: string;
+    login_removed: boolean;
+    warning?: string;
+  };
+}

@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useRoute } from "wouter";
-import { Check, X } from "lucide-react";
+import { Check, Trash2, UserMinus, UserPlus, X } from "lucide-react";
 import {
   fetchAllModules,
   fetchGrants,
   fetchMember,
   fetchMemberProgress,
   grantModule,
+  removeMember,
   revokeModule,
+  setMemberStatus,
 } from "@/lib/admin";
 import { SERIES_LABEL, type Series } from "@/lib/types";
 import { Empty, LessonRail, Spinner } from "@/components/Bits";
@@ -23,6 +26,9 @@ export default function AdminMemberDetail() {
   const id = Number(params?.id);
   const qc = useQueryClient();
   const [pending, setPending] = useState<number | null>(null);
+  const [confirmRemove, setConfirmRemove] = useState(false);
+  const [adminError, setAdminError] = useState<string | null>(null);
+  const [, navigate] = useLocation();
 
   const member = useQuery({ queryKey: ["admin-member", id], queryFn: () => fetchMember(id) });
   const grants = useQuery({ queryKey: ["grants", id], queryFn: () => fetchGrants(id) });
@@ -50,6 +56,28 @@ export default function AdminMemberDetail() {
       await qc.invalidateQueries({ queryKey: ["grants", id] });
       await qc.invalidateQueries({ queryKey: ["admin-member", id] });
       await qc.invalidateQueries({ queryKey: ["admin-members"] });
+    },
+  });
+
+  const status = useMutation({
+    mutationFn: (next: "active" | "inactive") => setMemberStatus(id, next),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["admin-member", id] });
+      await qc.invalidateQueries({ queryKey: ["admin-members"] });
+    },
+    onError: (e: Error) => setAdminError(e.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: () => removeMember(id),
+    onSuccess: async (res) => {
+      await qc.invalidateQueries({ queryKey: ["admin-members"] });
+      if (res.warning) setAdminError(res.warning);
+      else navigate("/admin");
+    },
+    onError: (e: Error) => {
+      setConfirmRemove(false);
+      setAdminError(e.message);
     },
   });
 
@@ -89,6 +117,45 @@ export default function AdminMemberDetail() {
             </div>
           ))}
         </dl>
+
+        {adminError && (
+          <p role="alert" className="mt-5 rounded-sm border border-rose/40 bg-rose/10 px-4 py-3 text-sm text-rose">
+            {adminError}
+          </p>
+        )}
+
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <button
+            onClick={() => {
+              setAdminError(null);
+              status.mutate(m.status === "inactive" ? "active" : "inactive");
+            }}
+            disabled={status.isPending}
+            className="flex items-center gap-2 rounded-sm border border-rule px-4 py-2.5 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-ink-soft transition-colors hover:border-gold hover:text-ink disabled:opacity-40"
+          >
+            {m.status === "inactive" ? <UserPlus size={14} /> : <UserMinus size={14} />}
+            {status.isPending
+              ? "Saving…"
+              : m.status === "inactive"
+                ? "Reactivate"
+                : "Deactivate"}
+          </button>
+          <button
+            onClick={() => {
+              setAdminError(null);
+              setConfirmRemove(true);
+            }}
+            className="flex items-center gap-2 rounded-sm px-3 py-2.5 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-ink-faint transition-colors hover:text-rose"
+          >
+            <Trash2 size={14} />
+            Remove
+          </button>
+          <p className="text-xs text-ink-faint">
+            {m.status === "inactive"
+              ? "Deactivated: signing in works, but they hold no modules until reactivated."
+              : "Deactivating keeps everything and can be undone. Removing cannot."}
+          </p>
+        </div>
       </div>
 
       <section className="flex flex-col gap-4">
@@ -153,6 +220,94 @@ export default function AdminMemberDetail() {
           })
         )}
       </section>
+      {confirmRemove && (
+        <RemoveMember
+          name={[m.first_name, m.last_name].filter(Boolean).join(" ") || m.email}
+          email={m.email}
+          lessonsCompleted={m.lessons_completed}
+          busy={remove.isPending}
+          onCancel={() => setConfirmRemove(false)}
+          onConfirm={() => remove.mutate()}
+        />
+      )}
+    </div>
+  );
+}
+
+/**
+ * Removing a member deletes their login and their record, and their entitlements and
+ * progress cascade with it. Deactivating is the reversible option and is offered here
+ * too, because it is usually what was meant.
+ */
+function RemoveMember({
+  name,
+  email,
+  lessonsCompleted,
+  busy,
+  onCancel,
+  onConfirm,
+}: {
+  name: string;
+  email: string;
+  lessonsCompleted: number;
+  busy: boolean;
+  onCancel: () => void;
+  onConfirm: () => void;
+}) {
+  const [typed, setTyped] = useState("");
+  const matches = typed.trim().toLowerCase() === email.toLowerCase();
+
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-ground-deep/80 px-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="remove-member-title"
+    >
+      <div className="w-full max-w-md rounded-sm border border-rule bg-panel p-7">
+        <h2 id="remove-member-title" className="font-serif text-2xl text-ink">
+          Remove {name}?
+        </h2>
+        <p className="mt-3 text-sm text-ink-soft">This permanently deletes:</p>
+        <ul className="mt-2 flex flex-col gap-1 text-sm text-ink-soft">
+          <li>· their login, so they can no longer sign in</li>
+          <li>· their module access</li>
+          <li>
+            · their progress, including{" "}
+            <span className="tabular-nums text-ink">{lessonsCompleted}</span> completed{" "}
+            {lessonsCompleted === 1 ? "lesson" : "lessons"}
+          </li>
+        </ul>
+        <p className="mt-3 text-sm text-ink-soft">
+          It cannot be undone. To cut off access but keep their record, cancel and deactivate them
+          instead.
+        </p>
+
+        <label className="mt-5 flex flex-col gap-1.5">
+          <span className="text-xs text-ink-faint">
+            Type <span className="text-ink">{email}</span> to confirm
+          </span>
+          <input
+            autoFocus
+            value={typed}
+            onChange={(e) => setTyped(e.target.value)}
+            className="rounded-sm border border-rule bg-ground px-3 py-2 text-sm text-ink"
+          />
+        </label>
+
+        <div className="mt-6 flex items-center justify-end gap-3">
+          <button onClick={onCancel} className="px-3 py-2 text-sm text-ink-soft hover:text-ink">
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={!matches || busy}
+            className="rounded-sm bg-rose px-4 py-2.5 text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-ground disabled:opacity-40"
+          >
+            {busy ? "Removing…" : "Remove permanently"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

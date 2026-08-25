@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { LogOut, Users } from "lucide-react";
+import { Layers, LogOut, Users } from "lucide-react";
 import { useAuth } from "@/context/Auth";
 import type { ReactNode } from "react";
 
@@ -24,13 +24,22 @@ export function Shell({ children }: { children: ReactNode }) {
               </span>
             )}
             {member?.is_admin && (
-              <Link
-                href="/admin"
-                className="flex items-center gap-1.5 text-gold no-underline transition-colors hover:text-gold-bright"
-              >
-                <Users size={15} aria-hidden="true" />
-                Members
-              </Link>
+              <>
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-1.5 text-gold no-underline transition-colors hover:text-gold-bright"
+                >
+                  <Users size={15} aria-hidden="true" />
+                  Members
+                </Link>
+                <Link
+                  href="/admin/modules"
+                  className="flex items-center gap-1.5 text-gold no-underline transition-colors hover:text-gold-bright"
+                >
+                  <Layers size={15} aria-hidden="true" />
+                  Modules
+                </Link>
+              </>
             )}
             <button
               onClick={() => void signOut()}

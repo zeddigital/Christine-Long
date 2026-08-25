@@ -10,6 +10,7 @@ import LessonPage from "@/pages/Lesson";
 import AdminMembers from "@/pages/admin/Members";
 import AdminMemberDetail from "@/pages/admin/MemberDetail";
 import AdminInvite from "@/pages/admin/Invite";
+import AdminModules from "@/pages/admin/Modules";
 
 const qc = new QueryClient({
   defaultOptions: { queries: { staleTime: 60_000, retry: 1, refetchOnWindowFocus: false } },
@@ -46,6 +47,7 @@ function Routes() {
         <Route path="/l/:slug" component={LessonPage} />
         <Route path="/admin" component={member.is_admin ? AdminMembers : Forbidden} />
         <Route path="/admin/invite" component={member.is_admin ? AdminInvite : Forbidden} />
+        <Route path="/admin/modules" component={member.is_admin ? AdminModules : Forbidden} />
         <Route
           path="/admin/members/:id"
           component={member.is_admin ? AdminMemberDetail : Forbidden}
