@@ -49,24 +49,24 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-aubergine px-6 py-16">
+    <div className="flex min-h-screen flex-col justify-center bg-ground-deep px-6 py-16">
       <div className="mx-auto w-full max-w-sm">
-        <h1 className="text-center font-serif text-4xl leading-none text-porcelain">A New You</h1>
-        <p className="mt-3 text-center text-sm text-plum">
+        <h1 className="text-center font-serif text-4xl leading-none text-ink">A New You</h1>
+        <p className="mt-3 text-center text-sm text-ink-soft">
           {mode === "reset" ? "We'll email you a link to set a new password." : "Sign in to your programme."}
         </p>
 
         {sent ? (
-          <div className="mt-8 rounded-sm border border-champagne/40 bg-aubergine/60 px-5 py-6 text-center">
-            <p className="text-sm text-porcelain">
-              Check <strong className="text-champagne-bright">{email}</strong> for a link to set your password.
+          <div className="mt-8 rounded-sm border border-rule bg-panel px-5 py-6 text-center">
+            <p className="text-sm text-ink">
+              Check <strong className="text-gold-bright">{email}</strong> for a link to set your password.
             </p>
             <button
               onClick={() => {
                 setSent(false);
                 setMode("signin");
               }}
-              className="mt-4 text-xs text-champagne-bright underline"
+              className="mt-4 text-xs text-gold-bright underline"
             >
               Back to sign in
             </button>
@@ -74,27 +74,27 @@ export default function Login() {
         ) : (
           <form onSubmit={submit} className="mt-8 flex flex-col gap-4">
             <label className="flex flex-col gap-1.5">
-              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-plum">Email</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-soft">Email</span>
               <input
                 type="email"
                 required
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="rounded-sm border border-plum/40 bg-porcelain/5 px-3 py-2.5 text-porcelain placeholder:text-plum/60"
+                className="rounded-sm border border-rule bg-ink/5 px-3 py-2.5 text-ink placeholder:text-ink-faint"
               />
             </label>
 
             {mode === "signin" && (
               <label className="flex flex-col gap-1.5">
-                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-plum">Password</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-soft">Password</span>
                 <input
                   type="password"
                   required
                   autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="rounded-sm border border-plum/40 bg-porcelain/5 px-3 py-2.5 text-porcelain"
+                  className="rounded-sm border border-rule bg-ink/5 px-3 py-2.5 text-ink"
                 />
               </label>
             )}
@@ -108,7 +108,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={busy}
-              className="mt-1 rounded-sm bg-champagne px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-aubergine disabled:opacity-60"
+              className="mt-1 rounded-sm bg-gold px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-ground disabled:opacity-60"
             >
               {busy ? "Just a moment…" : mode === "reset" ? "Send the link" : "Sign in"}
             </button>
@@ -119,7 +119,7 @@ export default function Login() {
                 setMode(mode === "signin" ? "reset" : "signin");
                 setError(null);
               }}
-              className="text-center text-xs text-plum underline hover:text-champagne-bright"
+              className="text-center text-xs text-ink-soft underline hover:text-gold-bright"
             >
               {mode === "signin" ? "Set or reset my password" : "Back to sign in"}
             </button>

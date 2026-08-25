@@ -8,21 +8,25 @@ export function Shell({ children }: { children: ReactNode }) {
   const name = member?.first_name || member?.email?.split("@")[0] || "";
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="bg-aubergine text-porcelain">
+    <div className="flex min-h-screen flex-col bg-ground">
+      <header className="border-b border-rule-soft bg-ground-deep">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
           <Link
             href="/"
-            className="font-serif text-2xl leading-none tracking-tight text-porcelain no-underline"
+            className="font-serif text-[1.75rem] leading-none tracking-tight text-ink no-underline"
           >
             A New You
           </Link>
-          <div className="flex items-center gap-5 text-sm">
-            {name && <span className="hidden text-plum sm:inline">Hello, {name}</span>}
+          <div className="flex items-center gap-6 text-sm">
+            {name && (
+              <span className="hidden text-ink-faint sm:inline">
+                Hello, <span className="text-ink-soft">{name}</span>
+              </span>
+            )}
             {member?.is_admin && (
               <Link
                 href="/admin"
-                className="flex items-center gap-1.5 text-champagne-bright no-underline hover:text-porcelain"
+                className="flex items-center gap-1.5 text-gold no-underline transition-colors hover:text-gold-bright"
               >
                 <Users size={15} aria-hidden="true" />
                 Members
@@ -30,7 +34,7 @@ export function Shell({ children }: { children: ReactNode }) {
             )}
             <button
               onClick={() => void signOut()}
-              className="flex items-center gap-1.5 text-champagne-bright hover:text-porcelain"
+              className="flex items-center gap-1.5 text-ink-faint transition-colors hover:text-ink"
             >
               <LogOut size={15} aria-hidden="true" />
               Sign out
@@ -39,10 +43,10 @@ export function Shell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">{children}</main>
+      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-12">{children}</main>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto max-w-5xl px-6 py-6 text-xs text-mute">
+      <footer className="border-t border-rule-soft">
+        <div className="mx-auto max-w-5xl px-6 py-7 text-xs text-ink-faint">
           A New You — member area. Your material is private to your account.
         </div>
       </footer>

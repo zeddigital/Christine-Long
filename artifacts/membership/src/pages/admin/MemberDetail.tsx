@@ -11,7 +11,7 @@ import {
   revokeModule,
 } from "@/lib/admin";
 import { SERIES_LABEL, type Series } from "@/lib/types";
-import { Empty, ProgressBar, Spinner } from "@/components/Bits";
+import { Empty, LessonRail, Spinner } from "@/components/Bits";
 import { supabase } from "@/lib/supabase";
 
 const ORDER: Series[] = ["transformation", "savvy_start_up", "itbiy", "bonus"];
@@ -68,13 +68,13 @@ export default function AdminMemberDetail() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <Link href="/admin" className="text-xs uppercase tracking-[0.14em] text-champagne no-underline">
+        <Link href="/admin" className="text-xs uppercase tracking-[0.14em] text-gold no-underline">
           ← Members
         </Link>
-        <h1 className="mt-4 font-serif text-4xl leading-tight text-aubergine">
+        <h1 className="mt-4 font-serif text-4xl leading-tight text-ink">
           {[m.first_name, m.last_name].filter(Boolean).join(" ") || m.email}
         </h1>
-        <p className="mt-2 font-mono text-sm text-plum">{m.email}</p>
+        <p className="mt-2 font-mono text-sm text-ink-soft">{m.email}</p>
         <dl className="mt-5 flex flex-wrap gap-x-10 gap-y-3 text-sm">
           {[
             ["Status", m.status],
@@ -84,18 +84,18 @@ export default function AdminMemberDetail() {
             ["Last active", date(m.last_activity)],
           ].map(([k, v]) => (
             <div key={k}>
-              <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-mute">{k}</dt>
-              <dd className="mt-0.5 text-charcoal">{v}</dd>
+              <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-faint">{k}</dt>
+              <dd className="mt-0.5 text-ink-soft">{v}</dd>
             </div>
           ))}
         </dl>
       </div>
 
       <section className="flex flex-col gap-4">
-        <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-champagne">
+        <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-gold">
           Module access
         </h2>
-        <p className="-mt-2 max-w-prose text-sm text-plum">
+        <p className="-mt-2 max-w-prose text-sm text-ink-soft">
           Ticking a module gives them access immediately. Removing it withdraws access but keeps the
           record, so you can always see what they once had.
         </p>
@@ -108,10 +108,10 @@ export default function AdminMemberDetail() {
             if (!items.length) return null;
             return (
               <div key={s} className="flex flex-col gap-2">
-                <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-mute">
+                <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint">
                   {SERIES_LABEL[s]}
                 </p>
-                <ul className="flex flex-col overflow-hidden rounded-sm border border-line">
+                <ul className="flex flex-col overflow-hidden rounded-sm border border-rule">
                   {items.map((mod) => {
                     const g = live.get(mod.id);
                     const has = !!g;
@@ -120,7 +120,7 @@ export default function AdminMemberDetail() {
                     return (
                       <li
                         key={mod.id}
-                        className="flex flex-wrap items-center gap-3 border-b border-line bg-surface px-4 py-3 last:border-0"
+                        className="flex flex-wrap items-center gap-3 border-b border-rule bg-panel px-4 py-3 last:border-0"
                       >
                         <button
                           onClick={() => change.mutate({ moduleId: mod.id, give: !has })}
@@ -129,18 +129,18 @@ export default function AdminMemberDetail() {
                           aria-label={`${has ? "Remove" : "Give"} ${mod.name}`}
                           className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border disabled:opacity-40 ${
                             has
-                              ? "border-champagne bg-champagne text-white"
-                              : "border-line bg-subtle text-transparent hover:border-champagne"
+                              ? "border-gold bg-gold text-ground"
+                              : "border-rule bg-panel-lift text-transparent hover:border-gold"
                           }`}
                         >
                           {has ? <Check size={13} strokeWidth={3} /> : <X size={13} />}
                         </button>
-                        <span className="min-w-0 flex-1 text-sm text-charcoal">{mod.name}</span>
+                        <span className="min-w-0 flex-1 text-sm text-ink-soft">{mod.name}</span>
                         {has && (
                           <>
-                            <span className="text-xs text-mute">given {date(g!.granted_at)}</span>
+                            <span className="text-xs text-ink-faint">given {date(g!.granted_at)}</span>
                             <span className="w-32">
-                              <ProgressBar done={done} total={total} />
+                              <LessonRail done={done} total={total} />
                             </span>
                           </>
                         )}

@@ -15,9 +15,9 @@ function when(iso: string | null) {
 }
 
 const STATUS: Record<string, string> = {
-  active: "bg-[#e2ebe0] text-[#4a6b50]",
-  invited: "bg-[#f6efdf] text-champagne",
-  inactive: "bg-subtle text-mute",
+  active: "border border-[#4f7357] bg-[#4f7357]/20 text-[#9ccfa6]",
+  invited: "border border-gold/50 bg-gold/15 text-gold-bright",
+  inactive: "border border-rule bg-transparent text-ink-faint",
 };
 
 export default function AdminMembers() {
@@ -33,27 +33,27 @@ export default function AdminMembers() {
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-4xl leading-none text-aubergine">Members</h1>
-          <p className="mt-3 text-plum">
+          <h1 className="font-serif text-4xl leading-none text-ink">Members</h1>
+          <p className="mt-3 text-ink-soft">
             {withAccess.length} with access · {rows.length - withAccess.length} dormant
           </p>
         </div>
         <Link
           href="/admin/invite"
-          className="flex items-center gap-2 rounded-sm bg-aubergine px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-porcelain no-underline"
+          className="flex items-center gap-2 rounded-sm bg-gold px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-ground transition-colors hover:bg-gold-bright no-underline"
         >
           <UserPlus size={14} aria-hidden="true" /> Add a member
         </Link>
       </div>
 
-      <div className="overflow-x-auto rounded-sm border border-line bg-surface">
+      <div className="overflow-x-auto rounded-sm border border-rule bg-panel">
         <table className="w-full min-w-[46rem] text-sm">
           <thead>
-            <tr className="border-b border-line bg-subtle text-left">
+            <tr className="border-b border-rule bg-panel-lift text-left">
               {["Member", "Status", "Modules", "Completed", "Last active"].map((h, i) => (
                 <th
                   key={h}
-                  className={`px-4 py-3 text-[10px] font-bold uppercase tracking-[0.12em] text-mute ${
+                  className={`px-4 py-3 text-[10px] font-bold uppercase tracking-[0.12em] text-ink-faint ${
                     i > 1 ? "text-right" : ""
                   }`}
                 >
@@ -64,16 +64,16 @@ export default function AdminMembers() {
           </thead>
           <tbody>
             {rows.map((m) => (
-              <tr key={m.id} className="border-b border-line last:border-0 hover:bg-subtle">
+              <tr key={m.id} className="border-b border-rule last:border-0 hover:bg-panel-lift">
                 <td className="px-4 py-3">
-                  <Link href={`/admin/members/${m.id}`} className="text-aubergine no-underline">
+                  <Link href={`/admin/members/${m.id}`} className="text-ink no-underline">
                     <span className="flex items-center gap-2">
                       {[m.first_name, m.last_name].filter(Boolean).join(" ") || m.email}
                       {m.is_admin && (
-                        <ShieldCheck size={13} className="text-champagne" aria-label="Admin" />
+                        <ShieldCheck size={13} className="text-gold" aria-label="Admin" />
                       )}
                     </span>
-                    <span className="block text-xs text-mute">{m.email}</span>
+                    <span className="block text-xs text-ink-faint">{m.email}</span>
                   </Link>
                 </td>
                 <td className="px-4 py-3">
@@ -87,7 +87,7 @@ export default function AdminMembers() {
                 </td>
                 <td className="px-4 py-3 text-right tabular-nums">{m.modules_held || "—"}</td>
                 <td className="px-4 py-3 text-right tabular-nums">{m.lessons_completed || "—"}</td>
-                <td className="px-4 py-3 text-right text-xs text-mute">{when(m.last_activity)}</td>
+                <td className="px-4 py-3 text-right text-xs text-ink-faint">{when(m.last_activity)}</td>
               </tr>
             ))}
           </tbody>

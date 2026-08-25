@@ -1,27 +1,44 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
-/* A New You — carried across from the rebrand so the member area and the public
-   site read as one property. */
+/* A New You — member area.
+ *
+ * The programme is a body of written work: 33 modules, 561 lessons, worksheets and
+ * audio. So the member area is built as a dark study with a lit page on the desk --
+ * the navigation and dashboard sit on a deep aubergine ground, and lesson prose sits
+ * on warm paper framed by it.
+ *
+ * The split is not decorative. Christine's lessons came out of WordPress carrying
+ * inline colours authored against a white page -- 50 runs of hard black, some dark
+ * green, and ~480 of her red emphasis. Prose has to stay on a light surface or her
+ * own formatting disappears, and it cannot be overridden without destroying the red
+ * she used deliberately. Everything that is *not* her prose is free to go dark.
+ */
 @theme {
-  /* White does the work; the brand shows up in the header, the headings and the accents.
-     Neutrals carry a slight warm bias so they still belong to A New You rather than
-     reading as generic grey. */
-  --color-page: #ffffff;
-  --color-surface: #ffffff;
-  --color-subtle: #f8f6f3;      /* table headers, quiet fills */
-  --color-porcelain: #f4f0ea;   /* kept for the sign-in screen */
-  --color-warmwhite: #ffffff;
-  --color-blush: #f8f6f3;
-  --color-charcoal: #2b262c;
-  --color-plum: #6b566d;
-  --color-mute: #8d8189;
-  --color-line: #e7e2dc;
-  --color-line-strong: #d5cdc5;
-  --color-aubergine: #2c2130;
-  --color-champagne: #a87f3c;
-  --color-champagne-bright: #c9a25a;
-  --color-rose: #b8705f;
+  /* Ground: deeper than the brand aubergine, so brand aubergine reads as a raised
+     surface rather than as the background. */
+  --color-ground: #17111c;
+  --color-ground-deep: #100b14;
+  --color-panel: #241b2a;
+  --color-panel-lift: #2f2436;
+  --color-rule: #3b2e43;
+  --color-rule-soft: #2b2031;
+
+  --color-ink: #f3eee7;
+  --color-ink-soft: #bfaec4;
+  --color-ink-faint: #9c8ba2;
+
+  /* The metal. Reserved for progress and wayfinding -- never for plain text. */
+  --color-gold: #c9a25a;
+  --color-gold-bright: #e0be7e;
+  --color-rose: #d98a76;
+
+  /* Paper: the reading surface, and the only light ground in the app. */
+  --color-paper: #fbf8f3;
+  --color-paper-edge: #efe8dc;
+  --color-paper-ink: #2a2430;
+  --color-paper-soft: #5e5266;
+  --color-paper-rule: #e4dbce;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -30,47 +47,65 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--color-page);
-  color: var(--color-charcoal);
+  background: var(--color-ground);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
-:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
-/* Christine's lessons arrive as HTML converted out of WordPress. These rules tame
-   what the page builder left behind without editing her content. */
-.lesson-body { font-size: 1.0625rem; line-height: 1.75; color: var(--color-charcoal); }
+/* ---------------------------------------------------------------------------
+   Lesson prose. Rendered on paper, so these stay dark-on-light.
+   These rules tame what the page builder left behind without editing content.
+   --------------------------------------------------------------------------- */
+.lesson-body { font-size: 1.0625rem; line-height: 1.75; color: var(--color-paper-ink); }
 .lesson-body > * + * { margin-top: 1rem; }
 .lesson-body h1, .lesson-body h2, .lesson-body h3, .lesson-body h4 {
-  font-family: var(--font-serif); font-weight: 500; line-height: 1.2;
-  color: var(--color-aubergine); margin-top: 2rem; text-wrap: balance;
+  font-family: var(--font-serif); font-weight: 500; line-height: 1.15;
+  color: var(--color-paper-ink); margin-top: 2.25rem; text-wrap: balance;
+  letter-spacing: -0.01em;
 }
-.lesson-body h1 { font-size: 1.9rem; }
-.lesson-body h2 { font-size: 1.6rem; }
-.lesson-body h3 { font-size: 1.3rem; }
+.lesson-body h1 { font-size: 2.1rem; }
+.lesson-body h2 { font-size: 1.7rem; }
+.lesson-body h3 { font-size: 1.35rem; }
 .lesson-body p { margin: 0 0 1rem; }
 .lesson-body ul, .lesson-body ol { margin: 0 0 1rem; padding-left: 1.4rem; }
 .lesson-body li { margin-bottom: 0.4rem; }
-.lesson-body a { color: var(--color-rose); text-underline-offset: 2px; }
-.lesson-body img { max-width: 100%; height: auto; border-radius: 3px; }
-.lesson-body strong { color: var(--color-aubergine); }
-.lesson-body hr { border: 0; border-top: 1px solid var(--color-line); margin: 2rem 0; }
+.lesson-body li::marker { color: var(--color-gold); }
+.lesson-body a { color: #a6402c; text-underline-offset: 2px; }
+.lesson-body img { max-width: 100%; height: auto; border-radius: 2px; }
+.lesson-body strong { color: var(--color-paper-ink); font-weight: 700; }
+.lesson-body hr { border: 0; border-top: 1px solid var(--color-paper-rule); margin: 2.25rem 0; }
+.lesson-body blockquote {
+  margin: 1.5rem 0; padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 2px solid var(--color-gold);
+  font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.5;
+  color: var(--color-paper-soft);
+}
 
-/* Buttons the page builder emitted, restyled as links rather than shouty CTAs. */
+/* Buttons the page builder emitted, restyled as quiet links rather than shouty CTAs.
+   653 sections use these, so they carry a lot of the reading experience. */
 .lesson-body a.btn {
-  display: block; padding: 0.75rem 1rem; margin-bottom: 0.5rem;
-  background: var(--color-subtle); border: 1px solid var(--color-line);
-  border-radius: 3px; text-decoration: none; color: var(--color-aubergine);
-  font-size: 0.9rem; font-weight: 600; transition: border-color 0.15s, background 0.15s;
+  display: block; padding: 0.8rem 1rem; margin-bottom: 0.5rem;
+  background: #fff; border: 1px solid var(--color-paper-rule);
+  border-left: 2px solid var(--color-gold);
+  border-radius: 2px; text-decoration: none; color: var(--color-paper-ink);
+  font-size: 0.9rem; font-weight: 600;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
-.lesson-body a.btn:hover { border-color: var(--color-champagne); background: #fff; box-shadow: 0 1px 3px rgba(43,38,44,.06); }
+.lesson-body a.btn:hover {
+  border-color: var(--color-paper-rule); border-left-color: var(--color-gold-bright);
+  box-shadow: 0 2px 12px -4px rgba(42, 36, 48, 0.25); transform: translateX(1px);
+}
 .lesson-body a[data-unresolved="1"] {
-  opacity: 0.55; pointer-events: none; text-decoration: line-through;
+  opacity: 0.45; pointer-events: none; text-decoration: line-through;
+  border-left-color: var(--color-paper-rule);
 }
-.lesson-body .video { position: relative; padding-top: 56.25%; margin: 1.5rem 0; border-radius: 3px; overflow: hidden; background: #000; }
+.lesson-body .video { position: relative; padding-top: 56.25%; margin: 1.5rem 0; border-radius: 2px; overflow: hidden; background: #000; }
 .lesson-body .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .lesson-body audio.track { width: 100%; margin: 1rem 0; }
 .lesson-body .spacer { height: 1rem; }
 .lesson-body table { width: 100%; border-collapse: collapse; }
 .lesson-body .rt > *:first-child { margin-top: 0; }
+.lesson-body > *:first-child { margin-top: 0; }

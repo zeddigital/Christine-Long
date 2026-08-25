@@ -39,9 +39,9 @@ export default function AdminInvite() {
 
   if (done)
     return (
-      <div className="mx-auto max-w-lg rounded-sm border border-line bg-surface p-8 text-center">
-        <h1 className="font-serif text-3xl text-aubergine">Invitation sent</h1>
-        <p className="mt-3 text-plum">
+      <div className="mx-auto max-w-lg rounded-sm border border-rule bg-panel p-8 text-center">
+        <h1 className="font-serif text-3xl text-ink">Invitation sent</h1>
+        <p className="mt-3 text-ink-soft">
           {done.existing
             ? `${email} already had a login, so we've sent them a link to set a new password.`
             : `${email} will receive an email with a link to set their password.`}
@@ -50,7 +50,7 @@ export default function AdminInvite() {
         <div className="mt-6 flex justify-center gap-3">
           <Link
             href="/admin"
-            className="rounded-sm bg-aubergine px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-porcelain no-underline"
+            className="rounded-sm bg-gold px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-ground transition-colors hover:bg-gold-bright no-underline"
           >
             Back to members
           </Link>
@@ -62,7 +62,7 @@ export default function AdminInvite() {
               setLast("");
               setPicked([]);
             }}
-            className="rounded-sm border border-line px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-aubergine"
+            className="rounded-sm border border-rule px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-ink"
           >
             Add another
           </button>
@@ -73,11 +73,11 @@ export default function AdminInvite() {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-8">
       <div>
-        <Link href="/admin" className="text-xs uppercase tracking-[0.14em] text-champagne no-underline">
+        <Link href="/admin" className="text-xs uppercase tracking-[0.14em] text-gold no-underline">
           ← Members
         </Link>
-        <h1 className="mt-4 font-serif text-4xl leading-none text-aubergine">Add a member</h1>
-        <p className="mt-3 text-plum">
+        <h1 className="mt-4 font-serif text-4xl leading-none text-ink">Add a member</h1>
+        <p className="mt-3 text-ink-soft">
           They'll get an email inviting them to set a password. Nothing is sent to anyone else.
         </p>
       </div>
@@ -85,35 +85,35 @@ export default function AdminInvite() {
       <form onSubmit={submit} className="flex flex-col gap-6">
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="flex flex-col gap-1.5 sm:col-span-2">
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-mute">Email</span>
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-ink-faint">Email</span>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-sm border border-line bg-surface px-3 py-2.5"
+              className="rounded-sm border border-rule bg-panel px-3 py-2.5"
             />
           </label>
           <label className="flex flex-col gap-1.5">
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-mute">First name</span>
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-ink-faint">First name</span>
             <input
               value={first}
               onChange={(e) => setFirst(e.target.value)}
-              className="rounded-sm border border-line bg-surface px-3 py-2.5"
+              className="rounded-sm border border-rule bg-panel px-3 py-2.5"
             />
           </label>
           <label className="flex flex-col gap-1.5">
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-mute">Last name</span>
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-ink-faint">Last name</span>
             <input
               value={last}
               onChange={(e) => setLast(e.target.value)}
-              className="rounded-sm border border-line bg-surface px-3 py-2.5"
+              className="rounded-sm border border-rule bg-panel px-3 py-2.5"
             />
           </label>
         </div>
 
         <fieldset className="flex flex-col gap-4">
-          <legend className="text-xs font-bold uppercase tracking-[0.12em] text-mute">
+          <legend className="text-xs font-bold uppercase tracking-[0.12em] text-ink-faint">
             Modules to give them {picked.length > 0 && `(${picked.length} selected)`}
           </legend>
           {mods.isLoading ? (
@@ -124,14 +124,14 @@ export default function AdminInvite() {
               if (!items.length) return null;
               return (
                 <div key={s}>
-                  <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-champagne">
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-gold">
                     {SERIES_LABEL[s]}
                   </p>
                   <div className="grid gap-1.5 sm:grid-cols-2">
                     {items.map((m) => (
                       <label
                         key={m.id}
-                        className="flex cursor-pointer items-start gap-2 rounded-sm border border-line bg-surface px-3 py-2 text-sm"
+                        className="flex cursor-pointer items-start gap-2 rounded-sm border border-rule bg-panel px-3 py-2 text-sm"
                       >
                         <input
                           type="checkbox"
@@ -162,7 +162,7 @@ export default function AdminInvite() {
         <button
           type="submit"
           disabled={busy}
-          className="self-start rounded-sm bg-aubergine px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-porcelain disabled:opacity-60"
+          className="self-start rounded-sm bg-gold px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-ground transition-colors hover:bg-gold-bright disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send invitation"}
         </button>

@@ -72,33 +72,29 @@ export default function LessonPage() {
       <div>
         <Link
           href={`/m/${module.slug}`}
-          className="text-xs uppercase tracking-[0.14em] text-champagne no-underline"
+          className="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-gold no-underline transition-colors hover:text-gold-bright"
         >
           ← {module.name}
         </Link>
-        <h1 className="mt-4 font-serif text-4xl leading-tight text-aubergine text-balance">
+        <h1 className="mt-5 font-serif text-[2.5rem] leading-[1.08] tracking-tight text-ink text-balance">
           {lesson.title}
         </h1>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
+      <div className="grid gap-8 lg:grid-cols-[1fr_19rem]">
         <div className="min-w-0">
           {sections.length > 1 && (
-            <div
-              role="tablist"
-              aria-label="Lesson sections"
-              className="mb-6 flex flex-wrap gap-2 border-b border-line pb-3"
-            >
+            <div role="tablist" aria-label="Lesson sections" className="mb-4 flex flex-wrap gap-2">
               {sections.map((s, i) => (
                 <button
                   key={s.id}
                   role="tab"
                   aria-selected={i === active}
                   onClick={() => setActive(i)}
-                  className={`rounded-sm px-3 py-1.5 text-xs font-semibold ${
+                  className={`rounded-sm border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                     i === active
-                      ? "bg-aubergine text-porcelain"
-                      : "bg-subtle text-plum hover:text-aubergine"
+                      ? "border-gold bg-gold text-ground"
+                      : "border-rule bg-panel text-ink-soft hover:border-ink-faint hover:text-ink"
                   }`}
                 >
                   {s.title}
@@ -107,29 +103,35 @@ export default function LessonPage() {
             </div>
           )}
 
-          {sections.length === 0 ? (
-            <Empty
-              title="This page has no content yet"
-              detail="It exists in the programme but was never filled in on the old site."
-            />
-          ) : (
-            <div
-              className="lesson-body"
-              /* Content is authored by Christine and loaded by the migration. Members
-                 have no write access to any content table, so this cannot carry
-                 member-supplied markup. */
-              dangerouslySetInnerHTML={{ __html: sections[active]?.body_html ?? "" }}
-            />
-          )}
+          {/* The page. Christine's prose carries inline colours authored for a white
+              background, so this surface stays light while everything around it is dark. */}
+          <div className="rounded-sm bg-paper px-7 py-9 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_18px_40px_-24px_rgba(0,0,0,0.8)] sm:px-10 sm:py-12">
+            {sections.length === 0 ? (
+              <div className="py-6 text-center">
+                <p className="font-serif text-2xl text-paper-ink">This page has no content yet</p>
+                <p className="mx-auto mt-2 max-w-md text-sm text-paper-soft">
+                  It exists in the programme but was never filled in on the old site.
+                </p>
+              </div>
+            ) : (
+              <div
+                className="lesson-body"
+                /* Content is authored by Christine and loaded by the migration. Members
+                   have no write access to any content table, so this cannot carry
+                   member-supplied markup. */
+                dangerouslySetInnerHTML={{ __html: sections[active]?.body_html ?? "" }}
+              />
+            )}
+          </div>
 
-          <div className="mt-10 border-t border-line pt-6">
+          <div className="mt-7">
             <button
               onClick={() => void toggle()}
               disabled={saving || !member}
-              className={`flex items-center gap-2 rounded-sm px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] disabled:opacity-60 ${
+              className={`flex items-center gap-2 rounded-sm px-5 py-3 text-[0.6875rem] font-bold uppercase tracking-[0.2em] transition-colors disabled:opacity-60 ${
                 done
-                  ? "border border-champagne bg-transparent text-champagne"
-                  : "bg-aubergine text-porcelain"
+                  ? "border border-gold bg-transparent text-gold hover:bg-gold/10"
+                  : "bg-gold text-ground hover:bg-gold-bright"
               }`}
             >
               {done && <Check size={14} aria-hidden="true" />}
