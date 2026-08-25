@@ -14,4 +14,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },
   build: { outDir: "dist/membership-site", emptyOutDir: true, sourcemap: true },
+  // Stamped into the bundle so a failure screen can say which build produced it. Without
+  // this there is no way to tell a fresh deployment from a cached one while debugging.
+  define: {
+    __BUILD__: JSON.stringify({
+      commit: (process.env.CF_PAGES_COMMIT_SHA ?? "local").slice(0, 7),
+      at: new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC",
+    }),
+  },
 });

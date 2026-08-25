@@ -2,6 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 
+declare const __BUILD__: { commit: string; at: string };
+
 const rootEl = document.getElementById("root")!;
 
 /**
@@ -40,7 +42,13 @@ function showStartupError(detail: string) {
     "margin:0;padding:12px 14px;border-radius:2px;background:rgba(0,0,0,.28);" +
     "font-size:.8rem;white-space:pre-wrap;word-break:break-word;color:#F4EFEA";
 
-  card.append(h, p, pre);
+  // Identifies the build on screen, so it is obvious whether a redeploy actually landed.
+  const stamp = document.createElement("p");
+  stamp.textContent = `build ${__BUILD__.commit} · ${__BUILD__.at}`;
+  stamp.style.cssText =
+    "margin:14px 0 0;font-size:.72rem;letter-spacing:.06em;color:#9A8AA0;font-variant-numeric:tabular-nums";
+
+  card.append(h, p, pre, stamp);
   wrap.append(card);
   rootEl.append(wrap);
 }
