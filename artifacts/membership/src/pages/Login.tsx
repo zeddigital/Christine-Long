@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase, SUPABASE_HOST } from "@/lib/supabase";
 
 type Mode = "signin" | "reset";
 
@@ -28,10 +28,20 @@ export default function Login() {
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong.";
+      const lower = msg.toLowerCase();
+      // A rejected fetch carries no status, so the browser reports only "Failed to fetch".
+      // Naming the host turns that into something actionable: it is nearly always a
+      // mistyped project ref in VITE_SUPABASE_URL, or the project being paused.
+      const unreachable =
+        lower.includes("failed to fetch") ||
+        lower.includes("networkerror") ||
+        lower.includes("load failed");
       setError(
-        msg.toLowerCase().includes("invalid login")
-          ? "That email and password don't match. If you've come from the old site, choose “Set or reset my password”."
-          : msg,
+        unreachable
+          ? `Couldn't reach ${SUPABASE_HOST}. The address is either wrong or the database is asleep — check VITE_SUPABASE_URL in Cloudflare Pages, and that the Supabase project isn't paused.`
+          : lower.includes("invalid login")
+            ? "That email and password don't match. If you've come from the old site, choose “Set or reset my password”."
+            : msg,
       );
     } finally {
       setBusy(false);
