@@ -1,0 +1,10 @@
+# Supabase CLI configuration for the A New You membership portal.
+# Link with: supabase link --project-ref nvinwutyhybukabwcjmi
+
+project_id = "anewyou-membership"
+
+[functions.invite-member]
+verify_jwt = true
+
+[functions.remove-member]
+verify_jwt = true
