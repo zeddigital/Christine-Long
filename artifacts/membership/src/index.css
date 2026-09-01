@@ -31,6 +31,9 @@
   /* The metal. Reserved for progress and wayfinding -- never for plain text. */
   --color-gold: #c9a25a;
   --color-gold-bright: #e0be7e;
+  /* Gold at 2.1:1 on white is unreadable as text, so the light surfaces get a deeper
+     bronze for anything that has to be read rather than just seen. */
+  --color-gold-deep: #8a6524;
   --color-rose: #d98a76;
 
   /* The reading surface: white, with black text, matching how the programme was

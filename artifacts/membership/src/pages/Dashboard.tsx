@@ -79,7 +79,7 @@ export default function Dashboard() {
       {grouped.map(({ series, items }) => (
         <section key={series} className="flex flex-col gap-5">
           <Eyebrow>{SERIES_LABEL[series]}</Eyebrow>
-          <div className="grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2">
+          <div className="grid gap-px overflow-hidden rounded-sm border border-paper-rule bg-paper-rule sm:grid-cols-2">
             {items.map((m) => {
               const lessonIds = counts.data?.get(m.id) ?? [];
               const done = lessonIds.filter((id) => doneIds.has(id)).length;
@@ -88,7 +88,7 @@ export default function Dashboard() {
                 <Link
                   key={m.id}
                   href={`/m/${m.slug}`}
-                  className="group relative flex flex-col gap-4 bg-panel px-6 py-5 no-underline transition-colors duration-200 hover:bg-panel-lift"
+                  className="group relative flex flex-col gap-4 bg-white px-6 py-5 no-underline transition-colors duration-200 hover:bg-paper-fill"
                 >
                   {/* The binding: a gold edge that appears as the card is picked up. */}
                   <span
@@ -97,17 +97,17 @@ export default function Dashboard() {
                       complete ? "opacity-100" : "opacity-0 group-hover:opacity-60"
                     }`}
                   />
-                  <h3 className="font-serif text-[1.4rem] leading-snug text-ink text-balance">
+                  <h3 className="font-serif text-[1.4rem] leading-snug text-paper-ink text-balance">
                     {m.name}
                   </h3>
                   <div className="mt-auto">
-                    <ModuleStatus done={done} total={lessonIds.length} />
+                    <ModuleStatus done={done} total={lessonIds.length} tone="light" />
                   </div>
                 </Link>
               );
             })}
             {items.length % 2 === 1 && (
-              <div className="hidden bg-panel sm:block" aria-hidden="true" />
+              <div className="hidden bg-white sm:block" aria-hidden="true" />
             )}
           </div>
         </section>

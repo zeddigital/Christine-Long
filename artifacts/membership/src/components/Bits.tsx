@@ -1,5 +1,8 @@
 import { Check } from "lucide-react";
 
+/** Which surface a control is sitting on, so it can pick readable colours. */
+type Tone = "dark" | "light";
+
 /**
  * A module's state on the dashboard.
  *
@@ -11,15 +14,24 @@ import { Check } from "lucide-react";
  * So the bar is only drawn once there is progress to show. An untouched module states
  * its size and nothing else, which makes "where was I" the thing that stands out.
  */
-export function ModuleStatus({ done, total }: { done: number; total: number }) {
+export function ModuleStatus({
+  done,
+  total,
+  tone = "dark",
+}: {
+  done: number;
+  total: number;
+  tone?: Tone;
+}) {
+  const faint = tone === "light" ? "text-paper-soft" : "text-ink-faint";
   if (total === 0) {
     // Three ITBIY modules carry no lessons at all; "0/0" reads as a fault.
-    return <p className="text-xs text-ink-faint">No lessons yet</p>;
+    return <p className={`text-xs ${faint}`}>No lessons yet</p>;
   }
 
   if (done === 0) {
     return (
-      <p className="text-xs text-ink-faint">
+      <p className={`text-xs ${faint}`}>
         <span className="tabular-nums">{total}</span> {total === 1 ? "lesson" : "lessons"}
       </p>
     );
@@ -27,24 +39,38 @@ export function ModuleStatus({ done, total }: { done: number; total: number }) {
 
   if (done === total) {
     return (
-      <p className="flex items-center gap-1.5 text-xs font-semibold text-gold">
+      <p
+        className={`flex items-center gap-1.5 text-xs font-semibold ${
+          tone === "light" ? "text-gold-deep" : "text-gold"
+        }`}
+      >
         <Check size={13} strokeWidth={3} aria-hidden="true" />
         All <span className="tabular-nums">{total}</span> complete
       </p>
     );
   }
 
-  return <LessonRail done={done} total={total} />;
+  return <LessonRail done={done} total={total} tone={tone} />;
 }
 
 /** Bar plus count. Used where progress is the point of the screen. */
-export function LessonRail({ done, total }: { done: number; total: number }) {
+export function LessonRail({
+  done,
+  total,
+  tone = "dark",
+}: {
+  done: number;
+  total: number;
+  tone?: Tone;
+}) {
   const pct = total ? Math.round((done / total) * 100) : 0;
 
   return (
     <div className="flex items-center gap-3">
       <div
-        className="h-1 flex-1 overflow-hidden rounded-full bg-rule"
+        className={`h-1 flex-1 overflow-hidden rounded-full ${
+          tone === "light" ? "bg-paper-rule" : "bg-rule"
+        }`}
         role="progressbar"
         aria-valuenow={pct}
         aria-valuemin={0}
@@ -56,7 +82,11 @@ export function LessonRail({ done, total }: { done: number; total: number }) {
           style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="shrink-0 text-xs tabular-nums text-ink-soft">
+      <span
+        className={`shrink-0 text-xs tabular-nums ${
+          tone === "light" ? "text-paper-soft" : "text-ink-soft"
+        }`}
+      >
         {done} of {total}
       </span>
     </div>
