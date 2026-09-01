@@ -64,15 +64,27 @@ body {
 .lesson-body > * + * { margin-top: 1rem; }
 .lesson-body h1, .lesson-body h2, .lesson-body h3, .lesson-body h4 {
   font-family: var(--font-serif); font-weight: 500; line-height: 1.15;
-  color: var(--color-paper-ink); margin-top: 2.25rem; text-wrap: balance;
-  letter-spacing: -0.01em;
+  color: var(--color-paper-ink); margin-top: 2.5rem; margin-bottom: 0.85rem;
+  text-wrap: balance; letter-spacing: -0.01em;
+  /* Cormorant defaults to oldstyle figures, which sit at x-height. That is why "STEP 1"
+     read as a large word beside a small numeral -- the markup was one size all along. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
 }
 .lesson-body h1 { font-size: 2.1rem; }
 .lesson-body h2 { font-size: 1.7rem; }
 .lesson-body h3 { font-size: 1.35rem; }
-.lesson-body p { margin: 0 0 1rem; }
-.lesson-body ul, .lesson-body ol { margin: 0 0 1rem; padding-left: 1.4rem; }
-.lesson-body li { margin-bottom: 0.4rem; }
+.lesson-body p { margin: 0 0 1.15rem; }
+/* Her headings are followed immediately by their explanation, so the paragraph should sit
+   with the heading rather than float between the two. */
+.lesson-body h1 + p, .lesson-body h2 + p,
+.lesson-body h3 + p, .lesson-body h4 + p { margin-top: 0; }
+.lesson-body ul, .lesson-body ol { margin: 0 0 1.3rem; padding-left: 1.5rem; }
+/* Preflight clears list-style, so her bulleted lists were rendering as bare indented
+   text with nothing to mark the items apart. */
+.lesson-body ul { list-style: disc outside; }
+.lesson-body ol { list-style: decimal outside; }
+.lesson-body li { margin-bottom: 0.6rem; padding-left: 0.2rem; }
 .lesson-body li::marker { color: var(--color-gold); }
 .lesson-body a { color: #a6402c; text-underline-offset: 2px; }
 .lesson-body a.btn[data-unresolved="1"] { background: var(--color-paper-fill); }
@@ -115,3 +127,34 @@ body {
    padding, so the box sits 10px deeper at the bottom than at the top. */
 .lesson-body > *:last-child { margin-bottom: 0; }
 .lesson-body a.btn:last-child { margin-bottom: 0; }
+
+/* ---------------------------------------------------------------------------
+   Embedded documents. In WordPress the PDF appeared where the link sat, rather
+   than sending the reader to another page; 381 of them are positioned this way
+   through the programme.
+   --------------------------------------------------------------------------- */
+.pdf-embed { margin: 1.75rem 0; }
+.pdf-embed figcaption {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--color-paper-fill);
+  border: 1px solid var(--color-paper-rule); border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  font-size: 0.85rem; font-weight: 600; color: var(--color-paper-ink);
+}
+.pdf-embed figcaption > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pdf-embed figcaption a {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  margin-left: auto; flex: none;
+  font-size: 0.78rem; font-weight: 600; color: var(--color-paper-soft); text-decoration: none;
+}
+.pdf-embed figcaption a:hover { color: var(--color-paper-ink); }
+.pdf-embed iframe {
+  display: block; width: 100%; height: min(80vh, 46rem); border: 1px solid var(--color-paper-rule);
+  border-radius: 0 0 3px 3px; background: #f7f7f8;
+}
+.pdf-embed-note {
+  margin: 0; padding: 1.5rem 0.95rem; text-align: center;
+  border: 1px solid var(--color-paper-rule); border-radius: 0 0 3px 3px;
+  font-size: 0.85rem; color: var(--color-paper-soft);
+}

@@ -1,6 +1,5 @@
-import { useEffect, useState, type MouseEvent } from "react";
-import { useLocation } from "wouter";
-import { prepareBody } from "@/lib/content";
+import { useEffect, useState } from "react";
+import { RichBody } from "@/components/RichBody";
 import type { LessonSection } from "@/lib/types";
 
 /**
@@ -22,7 +21,6 @@ export function SectionBoard({
   firstName: string;
 }) {
   const [active, setActive] = useState(0);
-  const [, navigate] = useLocation();
 
   // Reset when the caller swaps in a different lesson's sections.
   const key = sections[0]?.lesson_id;
@@ -30,22 +28,6 @@ export function SectionBoard({
 
   if (sections.length === 0) return null;
   const current = sections[Math.min(active, sections.length - 1)];
-
-  /**
-   * Her buttons are plain anchors inside injected HTML, so a click would reload the whole
-   * app. Catching it here keeps navigation client-side; anything external, or opened with
-   * a modifier, is left to the browser.
-   */
-  function onContentClick(e: MouseEvent<HTMLDivElement>) {
-    const link = (e.target as HTMLElement).closest("a");
-    if (!link) return;
-    const href = link.getAttribute("href") ?? "";
-    if (!href.startsWith("/membership-site/")) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    if (link.target === "_blank") return;
-    e.preventDefault();
-    navigate(href.replace("/membership-site", ""));
-  }
 
   return (
     // Padding sits on the box rather than on each column, so the inset is the same on
@@ -82,18 +64,10 @@ export function SectionBoard({
         </div>
 
         {/* Right: the selected section's material. */}
-        <div
-          className="min-w-0"
-          onClick={onContentClick}
-          role="tabpanel"
-          aria-label={current.title}
-        >
-          <div
-            className="lesson-body"
-            /* Authored by Christine and loaded by the migration. Members have no write
-               access to any content table, so this cannot carry member-supplied markup. */
-            dangerouslySetInnerHTML={{ __html: prepareBody(current.body_html, firstName) }}
-          />
+        <div className="min-w-0" role="tabpanel" aria-label={current.title}>
+          {/* Authored by Christine and loaded by the migration. Members have no write
+              access to any content table, so this cannot carry member-supplied markup. */}
+          <RichBody html={current.body_html} firstName={firstName} />
         </div>
       </div>
     </div>

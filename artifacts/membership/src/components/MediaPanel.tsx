@@ -4,10 +4,21 @@ import { signedUrl } from "@/lib/api";
 import type { LessonMedia } from "@/lib/types";
 
 /** Worksheets and audio live in a private bucket, so each needs a short-lived signed URL. */
-export function MediaPanel({ media }: { media: LessonMedia[] }) {
+export function MediaPanel({
+  media,
+  hidePaths,
+}: {
+  media: LessonMedia[];
+  hidePaths?: Set<string>;
+}) {
   const [urls, setUrls] = useState<Record<number, string | null>>({});
 
-  const files = media.filter((m) => m.media.provider === "storage" && m.role !== "image");
+  const files = media.filter(
+    (m) =>
+      m.media.provider === "storage" &&
+      m.role !== "image" &&
+      !(m.media.storage_path && hidePaths?.has(m.media.storage_path)),
+  );
 
   useEffect(() => {
     let cancelled = false;

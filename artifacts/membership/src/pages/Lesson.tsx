@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, useLocation, useRoute } from "wouter";
+import { Link, useRoute } from "wouter";
 import { Check } from "lucide-react";
 import { fetchLessonBySlug, fetchProgress, markProgress } from "@/lib/api";
 import { Empty, Spinner } from "@/components/Bits";
 import { MediaPanel } from "@/components/MediaPanel";
 import { SectionBoard } from "@/components/SectionBoard";
-import { prepareBody } from "@/lib/content";
+import { RichBody } from "@/components/RichBody";
+import { inlinePdfPaths } from "@/lib/content";
 import { useAuth } from "@/context/Auth";
 
 export default function LessonPage() {
@@ -15,7 +16,6 @@ export default function LessonPage() {
   const { member } = useAuth();
   const qc = useQueryClient();
   const [saving, setSaving] = useState(false);
-  const [, navigate] = useLocation();
 
   const q = useQuery({ queryKey: ["lesson", slug], queryFn: () => fetchLessonBySlug(slug) });
   const progress = useQuery({ queryKey: ["progress"], queryFn: fetchProgress });
@@ -37,6 +37,8 @@ export default function LessonPage() {
     );
 
   const { lesson, module, media } = q.data;
+  // A document embedded in the text does not also need a link beside it.
+  const embedded = new Set(sections.flatMap((s) => inlinePdfPaths(s.body_html)));
   const done = (progress.data ?? []).find((p) => p.lesson_id === lesson.id)?.completed_at;
 
   async function toggle() {
@@ -48,18 +50,6 @@ export default function LessonPage() {
     } finally {
       setSaving(false);
     }
-  }
-
-  /** Keeps her in-content buttons client-side on single-section pages too. */
-  function onContentClick(e: React.MouseEvent<HTMLDivElement>) {
-    const link = (e.target as HTMLElement).closest("a");
-    if (!link) return;
-    const href = link.getAttribute("href") ?? "";
-    if (!href.startsWith("/membership-site/")) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    if (link.target === "_blank") return;
-    e.preventDefault();
-    navigate(href.replace("/membership-site", ""));
   }
 
   return (
@@ -86,16 +76,10 @@ export default function LessonPage() {
       ) : sections.length > 1 ? (
         <SectionBoard sections={sections} firstName={firstName} />
       ) : (
-        <div
-          className="rounded-sm bg-white px-7 py-9 shadow-[0_18px_44px_-26px_rgba(0,0,0,0.85)] sm:px-10 sm:py-11"
-          onClick={onContentClick}
-        >
-          <div
-            className="lesson-body"
-            /* Authored by Christine and loaded by the migration. Members have no write
-               access to any content table, so this cannot carry member-supplied markup. */
-            dangerouslySetInnerHTML={{ __html: prepareBody(sections[0].body_html, firstName) }}
-          />
+        <div className="rounded-sm bg-white px-7 py-9 shadow-[0_18px_44px_-26px_rgba(0,0,0,0.85)] sm:px-10 sm:py-11">
+          {/* Authored by Christine and loaded by the migration. Members have no write
+              access to any content table, so this cannot carry member-supplied markup. */}
+          <RichBody html={sections[0].body_html} firstName={firstName} />
         </div>
       )}
 
@@ -115,7 +99,7 @@ export default function LessonPage() {
           </button>
         </div>
 
-        <MediaPanel media={media} />
+        <MediaPanel media={media} hidePaths={embedded} />
       </div>
     </article>
   );
