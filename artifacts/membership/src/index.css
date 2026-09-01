@@ -39,7 +39,7 @@
   --color-paper-ink: #1c1c1e;
   --color-paper-soft: #5b5b63;
   --color-paper-rule: #e6e6e8;
-  --color-paper-fill: #f1f1f3;
+  --color-paper-fill: #f4f4f6;   /* material bars, right column -- lighter than the left tabs */
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -97,7 +97,7 @@ body {
   transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 .lesson-body a.btn:hover {
-  background: #eaeaee; border-color: #dcdce1;
+  background: #ececf0; border-color: #dfdfe4;
   box-shadow: 0 2px 10px -4px rgba(0, 0, 0, 0.18);
 }
 .lesson-body a[data-unresolved="1"] {
@@ -111,3 +111,7 @@ body {
 .lesson-body table { width: 100%; border-collapse: collapse; }
 .lesson-body .rt > *:first-child { margin-top: 0; }
 .lesson-body > *:first-child { margin-top: 0; }
+/* The trailing margin on the last item otherwise adds itself to the panel's bottom
+   padding, so the box sits 10px deeper at the bottom than at the top. */
+.lesson-body > *:last-child { margin-bottom: 0; }
+.lesson-body a.btn:last-child { margin-bottom: 0; }

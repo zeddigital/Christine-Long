@@ -48,14 +48,18 @@ export function SectionBoard({
   }
 
   return (
-    <div className="overflow-hidden rounded-sm bg-white shadow-[0_18px_44px_-26px_rgba(0,0,0,0.85)]">
-      <div className="grid lg:grid-cols-[19rem_1fr]">
-        {/* Left: the section tabs. */}
+    // Padding sits on the box rather than on each column, so the inset is the same on
+    // every side. Splitting it between the columns left the tabs nearly flush to the
+    // left edge while the material stopped well short of the right.
+    <div className="rounded-sm bg-white p-7 shadow-[0_18px_44px_-26px_rgba(0,0,0,0.85)] sm:p-10 lg:p-12">
+      <div className="grid gap-8 lg:grid-cols-[20rem_1fr] lg:gap-12">
+        {/* Left: the section tabs. Tinted a shade cooler than the material bars on the
+            right, so the two columns read as different kinds of thing. */}
         <div
           role="tablist"
           aria-orientation="vertical"
           aria-label="Sections"
-          className="flex flex-col gap-1.5 border-b border-[#e6e6e8] bg-[#fafafa] p-3 lg:border-b-0 lg:border-r"
+          className="flex flex-col gap-2.5"
         >
           {sections.map((s, i) => {
             const on = i === (active < sections.length ? active : 0);
@@ -65,10 +69,10 @@ export function SectionBoard({
                 role="tab"
                 aria-selected={on}
                 onClick={() => setActive(i)}
-                className={`rounded-sm px-4 py-3 text-left text-sm transition-colors ${
+                className={`rounded-sm px-5 py-4 text-left text-sm leading-snug transition-colors ${
                   on
                     ? "bg-ground font-semibold text-white"
-                    : "bg-[#f1f1f3] text-[#3f3f46] hover:bg-[#e8e8ea]"
+                    : "bg-[#e7e3ec] text-[#3a3540] hover:bg-[#ddd8e4]"
                 }`}
               >
                 {s.title}
@@ -79,7 +83,7 @@ export function SectionBoard({
 
         {/* Right: the selected section's material. */}
         <div
-          className="min-w-0 px-6 py-7 sm:px-9 sm:py-9"
+          className="min-w-0"
           onClick={onContentClick}
           role="tabpanel"
           aria-label={current.title}
