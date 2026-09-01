@@ -33,12 +33,13 @@
   --color-gold-bright: #e0be7e;
   --color-rose: #d98a76;
 
-  /* Paper: the reading surface, and the only light ground in the app. */
-  --color-paper: #fbf8f3;
-  --color-paper-edge: #efe8dc;
-  --color-paper-ink: #2a2430;
-  --color-paper-soft: #5e5266;
-  --color-paper-rule: #e4dbce;
+  /* The reading surface: white, with black text, matching how the programme was
+     presented in WordPress and how Christine's inline colours were authored. */
+  --color-paper: #ffffff;
+  --color-paper-ink: #1c1c1e;
+  --color-paper-soft: #5b5b63;
+  --color-paper-rule: #e6e6e8;
+  --color-paper-fill: #f1f1f3;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -74,6 +75,7 @@ body {
 .lesson-body li { margin-bottom: 0.4rem; }
 .lesson-body li::marker { color: var(--color-gold); }
 .lesson-body a { color: #a6402c; text-underline-offset: 2px; }
+.lesson-body a.btn[data-unresolved="1"] { background: var(--color-paper-fill); }
 .lesson-body img { max-width: 100%; height: auto; border-radius: 2px; }
 .lesson-body strong { color: var(--color-paper-ink); font-weight: 700; }
 .lesson-body hr { border: 0; border-top: 1px solid var(--color-paper-rule); margin: 2.25rem 0; }
@@ -84,19 +86,19 @@ body {
   color: var(--color-paper-soft);
 }
 
-/* Buttons the page builder emitted, restyled as quiet links rather than shouty CTAs.
-   653 sections use these, so they carry a lot of the reading experience. */
+/* The material links. 653 sections are built from these, so they carry most of the
+   reading experience -- they are the right-hand column of the module board, and they
+   keep the centred grey-bar shape they had in WordPress. */
 .lesson-body a.btn {
-  display: block; padding: 0.8rem 1rem; margin-bottom: 0.5rem;
-  background: #fff; border: 1px solid var(--color-paper-rule);
-  border-left: 2px solid var(--color-gold);
-  border-radius: 2px; text-decoration: none; color: var(--color-paper-ink);
-  font-size: 0.9rem; font-weight: 600;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  display: block; padding: 0.95rem 1.25rem; margin-bottom: 0.6rem;
+  background: var(--color-paper-fill); border: 1px solid transparent;
+  border-radius: 3px; text-decoration: none; color: var(--color-paper-ink);
+  font-size: 0.95rem; font-weight: 500; text-align: center;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 .lesson-body a.btn:hover {
-  border-color: var(--color-paper-rule); border-left-color: var(--color-gold-bright);
-  box-shadow: 0 2px 12px -4px rgba(42, 36, 48, 0.25); transform: translateX(1px);
+  background: #eaeaee; border-color: #dcdce1;
+  box-shadow: 0 2px 10px -4px rgba(0, 0, 0, 0.18);
 }
 .lesson-body a[data-unresolved="1"] {
   opacity: 0.45; pointer-events: none; text-decoration: line-through;

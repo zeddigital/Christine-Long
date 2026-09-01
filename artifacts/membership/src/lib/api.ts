@@ -106,3 +106,32 @@ export async function signedUrl(item: MediaItem, seconds = 3600): Promise<string
   if (error) return null;
   return data?.signedUrl ?? null;
 }
+
+/**
+ * The module's hub page — the "Membership Site — <name>" lesson carried over from
+ * WordPress, whose sections are the module's tabs. Seventeen of the thirty-three modules
+ * have one; the rest are single-page modules with nothing to tab between.
+ */
+export async function fetchModuleHub(
+  moduleId: number,
+): Promise<{ hub: Lesson; sections: LessonSection[] } | null> {
+  const { data: hub, error } = await supabase
+    .from("lessons")
+    .select("id,module_id,title,slug,status,sort_order")
+    .eq("module_id", moduleId)
+    .ilike("title", "Membership Site%")
+    .order("id")
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  if (!hub) return null;
+
+  const { data: sections, error: sErr } = await supabase
+    .from("lesson_sections")
+    .select("id,lesson_id,section_key,title,body_html,is_empty,sort_order")
+    .eq("lesson_id", hub.id)
+    .order("sort_order");
+  if (sErr) throw sErr;
+
+  return { hub, sections: (sections ?? []).filter((s) => !s.is_empty) };
+}
