@@ -192,6 +192,20 @@ button:disabled { cursor: not-allowed; }
   padding: 0.8rem 1.1rem; font-size: 0.875rem;
 }
 
+/* The marker each file is rendered into. display:contents takes the wrapper out of the
+   layout, so the document, player or picture sits in the flow exactly as her own element
+   did -- and the spacing rules above keep working across it. */
+.lesson-body div[data-media] { display: contents; }
+.lesson-body div[data-media] > img { display: block; margin: 1.5rem 0; }
+
+/* Said in place of a file that has not made it across from the old site yet, and while a
+   signed URL is still being minted. */
+.media-note {
+  margin: 1.1rem 0; padding: 0.85rem 1rem;
+  background: var(--color-paper-fill); border: 1px solid var(--color-paper-rule);
+  border-radius: 3px; font-size: 0.85rem; color: var(--color-paper-soft);
+}
+
 /* Her "click here to download" anchors. 157 of the 159 point at a file that is
    uploaded; the /media/ path they carry resolves to nothing, so they were dead. */
 .media-download { margin: 1.1rem 0; }

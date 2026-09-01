@@ -7,7 +7,7 @@ import { Empty, Spinner } from "@/components/Bits";
 import { MediaPanel } from "@/components/MediaPanel";
 import { SectionBoard } from "@/components/SectionBoard";
 import { RichBody } from "@/components/RichBody";
-import { inlinePdfPaths } from "@/lib/content";
+import { inlineMediaPaths } from "@/lib/content";
 import { useAuth } from "@/context/Auth";
 
 export default function LessonPage() {
@@ -37,8 +37,9 @@ export default function LessonPage() {
     );
 
   const { lesson, module, media } = q.data;
-  // A document embedded in the text does not also need a link beside it.
-  const embedded = new Set(sections.flatMap((s) => inlinePdfPaths(s.body_html)));
+  // A file already shown in the text does not also need a copy beside it. This is why the
+  // sidebar used to carry the very tracks whose players sit in the body.
+  const embedded = new Set(sections.flatMap((s) => inlineMediaPaths(s.body_html)));
   const done = (progress.data ?? []).find((p) => p.lesson_id === lesson.id)?.completed_at;
 
   async function toggle() {

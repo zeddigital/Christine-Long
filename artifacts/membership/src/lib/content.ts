@@ -32,17 +32,13 @@ export function personalise(html: string, firstName: string): string {
     .replace(/\s*\{\{first_name\}\}/g, "");
 }
 
-/** Marks a place the renderer fills in with a document, once it has a signed URL. */
-export const MEDIA_MARKER =
-  /<div data-media="([^"]*)" data-label="([^"]*)" data-mode="(embed|download)"><\/div>/;
+/** What the renderer should put in a marker's place, once it has a signed URL. */
+export type MediaMode = "embed" | "download" | "audio" | "image";
 
-/**
- * The same marker for String.split. It carries exactly one capture group, because split
- * inserts every captured group into the result array -- with the groups above, the storage
- * path and the label were being rendered as text alongside the document.
- */
-export const MEDIA_SPLIT =
-  /(<div data-media="(?:[^"]*)" data-label="(?:[^"]*)" data-mode="(?:embed|download)"><\/div>)/;
+/** Marks a place the renderer fills in with a file, once it has a signed URL. */
+export const MEDIA_MARKER =
+  /<div data-media="([^"]*)" data-label="([^"]*)" data-mode="(embed|download|audio|image)"><\/div>/;
+
 
 /**
  * Her PDFs are already positioned in the text -- WordPress embedded a viewer where the
@@ -55,15 +51,44 @@ export const MEDIA_SPLIT =
  * needs an async signed URL and therefore cannot be done in a string pass.
  */
 export function markMedia(html: string): string {
-  return html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (whole, attrs: string, label: string) => {
-    const href = /href="\/media\/([^"]+)"/i.exec(attrs);
-    if (!href) return whole;
-    // data-type="pdf" is the one WordPress showed inline; the other 159 /media/ links are
-    // her "click here to download" anchors, which resolve to nothing here and were dead.
-    const mode = /data-type="pdf"/i.test(attrs) ? "embed" : "download";
-    const text = label.replace(/<[^>]*>/g, "").trim();
-    return `<div data-media="${href[1]}" data-label="${escapeAttr(text)}" data-mode="${mode}"></div>`;
-  });
+  return (
+    html
+      .replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (whole, attrs: string, label: string) => {
+        const href = /href="\/media\/([^"]+)"/i.exec(attrs);
+        if (!href) return whole;
+        // data-type="pdf" is the one WordPress showed inline; the other 159 /media/ links are
+        // her "click here to download" anchors, which resolve to nothing here and were dead.
+        const mode = /data-type="pdf"/i.test(attrs) ? "embed" : "download";
+        const text = label.replace(/<[^>]*>/g, "").trim();
+        return marker(href[1], text, mode);
+      })
+      // The players. 96 of them across the programme, all still pointing at /media/, so the
+      // control drew itself but had no source behind it -- it looked like audio and did
+      // nothing when clicked, while the real track was signed separately into the sidebar at
+      // the foot of the page. All 37 files are uploaded.
+      .replace(/<audio\b([^>]*)>[\s\S]*?<\/audio>/gi, (whole, attrs: string) => {
+        const src = /src="([^"]*)"/i.exec(attrs);
+        if (!src) return whole;
+        const path = /^\/media\/(.+)$/.exec(src[1]);
+        // Two attunements were exported with src="undefined" and have no audio row at all.
+        // They still get a marker, so the page says the recording is missing rather than
+        // offering a control that cannot play.
+        if (!path && src[1] !== "undefined") return whole;
+        return marker(path ? path[1] : "", "", "audio");
+      })
+      // Her pictures, dead the same way: 98 placements of 30 uploaded files, every one of
+      // them drawing a broken-image icon.
+      .replace(/<img\b([^>]*)>/gi, (whole, attrs: string) => {
+        const src = /src="\/media\/([^"]+)"/i.exec(attrs);
+        if (!src) return whole;
+        const alt = /alt="([^"]*)"/i.exec(attrs);
+        return marker(src[1], alt?.[1] ?? "", "image");
+      })
+  );
+}
+
+function marker(path: string, label: string, mode: MediaMode): string {
+  return `<div data-media="${path}" data-label="${escapeAttr(label)}" data-mode="${mode}"></div>`;
 }
 
 /**
@@ -86,8 +111,8 @@ export function groupTrailingNav(html: string): string {
 }
 
 /** The storage paths shown in a body, so the sidebar can skip what is already on show. */
-export function inlinePdfPaths(html: string): string[] {
-  return [...html.matchAll(/<a\b[^>]*href="\/media\/([^"]+)"/gi)].map((m) => m[1]);
+export function inlineMediaPaths(html: string): string[] {
+  return [...html.matchAll(/(?:href|src)="\/media\/([^"]+)"/gi)].map((m) => m[1]);
 }
 
 function escapeAttr(s: string): string {
