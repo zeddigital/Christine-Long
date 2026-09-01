@@ -114,7 +114,7 @@ export async function signedUrl(item: MediaItem, seconds = 3600): Promise<string
  */
 export async function fetchModuleHub(
   moduleId: number,
-): Promise<{ hub: Lesson; sections: LessonSection[] } | null> {
+): Promise<{ hub: Lesson; sections: LessonSection[]; portrait: MediaItem | null } | null> {
   const { data: hub, error } = await supabase
     .from("lessons")
     .select("id,module_id,title,slug,status,sort_order")
@@ -126,12 +126,30 @@ export async function fetchModuleHub(
   if (error) throw error;
   if (!hub) return null;
 
-  const { data: sections, error: sErr } = await supabase
-    .from("lesson_sections")
-    .select("id,lesson_id,section_key,title,body_html,is_empty,sort_order")
-    .eq("lesson_id", hub.id)
-    .order("sort_order");
-  if (sErr) throw sErr;
+  const [sections, portrait] = await Promise.all([
+    supabase
+      .from("lesson_sections")
+      .select("id,lesson_id,section_key,title,body_html,is_empty,sort_order")
+      .eq("lesson_id", hub.id)
+      .order("sort_order"),
+    // The header portrait. Every one of the seventeen hubs carries exactly one image and
+    // it is Christine -- three different shots across the programme, so it is read from
+    // the row rather than hard-coded to a path.
+    supabase
+      .from("lesson_media")
+      .select("media(id,kind,provider,storage_path,external_id,title,available)")
+      .eq("lesson_id", hub.id)
+      .eq("role", "image")
+      .order("sort_order")
+      .limit(1)
+      .maybeSingle(),
+  ]);
+  if (sections.error) throw sections.error;
 
-  return { hub, sections: (sections ?? []).filter((s) => !s.is_empty) };
+  return {
+    hub,
+    sections: (sections.data ?? []).filter((s) => !s.is_empty),
+    // A missing portrait is not a fault -- the header simply runs without it.
+    portrait: (portrait.data?.media as MediaItem | undefined) ?? null,
+  };
 }

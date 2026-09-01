@@ -4,6 +4,7 @@ import { Link, useRoute } from "wouter";
 import { Check, ChevronDown } from "lucide-react";
 import { fetchLessons, fetchModuleBySlug, fetchModuleHub, fetchProgress } from "@/lib/api";
 import { Empty, LessonRail, Spinner } from "@/components/Bits";
+import { ModuleHeader } from "@/components/ModuleHeader";
 import { SectionBoard } from "@/components/SectionBoard";
 import { useAuth } from "@/context/Auth";
 
@@ -26,7 +27,9 @@ export default function ModulePage() {
   });
   const progress = useQuery({ queryKey: ["progress"], queryFn: fetchProgress });
 
-  if (mod.isLoading) return <Spinner />;
+  // The hub query cannot start until the module id is known, so waiting for both keeps
+  // the page from drawing a header and then swapping it for the welcome.
+  if (mod.isLoading || hub.isLoading) return <Spinner label="Loading module" />;
   if (!mod.data)
     return (
       <Empty
@@ -39,27 +42,38 @@ export default function ModulePage() {
   const items = lessons.data ?? [];
   const board = hub.data;
 
-  return (
-    <div className="flex flex-col gap-8">
-      <div>
-        <Link
-          href="/"
-          className="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-gold no-underline transition-colors hover:text-gold-bright"
-        >
-          ← All modules
-        </Link>
-        <h1 className="mt-5 font-serif text-[2.5rem] leading-[1.08] tracking-tight text-ink text-balance">
-          {mod.data.name}
-        </h1>
-        {mod.data.summary && <p className="mt-4 max-w-prose text-ink-soft">{mod.data.summary}</p>}
-        <div className="mt-6 max-w-sm">
-          <LessonRail done={items.filter((l) => done.has(l.id)).length} total={items.length} />
-        </div>
-      </div>
+  const doneCount = items.filter((l) => done.has(l.id)).length;
 
-      {hub.isLoading ? (
-        <Spinner label="Loading module" />
-      ) : board ? (
+  return (
+    <div className="flex flex-col gap-9">
+      {board ? (
+        <ModuleHeader
+          module={mod.data}
+          portrait={board.portrait}
+          done={doneCount}
+          total={items.length}
+        />
+      ) : (
+        // No board means no left navigation and no button below, so the welcome would be
+        // giving directions to things that are not on the page.
+        <div>
+          <Link
+            href="/"
+            className="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-gold no-underline transition-colors hover:text-gold-bright"
+          >
+            ← All modules
+          </Link>
+          <h1 className="mt-5 font-serif text-[2.5rem] leading-[1.08] tracking-tight text-ink text-balance">
+            {mod.data.name}
+          </h1>
+          {mod.data.summary && <p className="mt-4 max-w-prose text-ink-soft">{mod.data.summary}</p>}
+          <div className="mt-6 max-w-sm">
+            <LessonRail done={doneCount} total={items.length} />
+          </div>
+        </div>
+      )}
+
+      {board ? (
         <>
           <SectionBoard sections={board.sections} firstName={member?.first_name?.trim() || ""} />
 
