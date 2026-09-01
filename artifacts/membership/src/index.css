@@ -54,6 +54,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 2px; }
+
+/* Browsers give <button> a default arrow, and preflight does not change it, so the
+   section tabs and every other control read as inert next to the anchors -- which do
+   get a pointer. This makes anything clickable behave the same way. */
+button:not(:disabled),
+[role="tab"],
+summary,
+label:has(> input[type="checkbox"]),
+input[type="checkbox"] { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
 /* ---------------------------------------------------------------------------
