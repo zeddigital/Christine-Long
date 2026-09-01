@@ -32,15 +32,17 @@ export function personalise(html: string, firstName: string): string {
     .replace(/\s*\{\{first_name\}\}/g, "");
 }
 
-/** Marks where a PDF should be embedded, for the renderer to fill in with a viewer. */
-export const PDF_MARKER = /<div data-pdf="([^"]*)" data-label="([^"]*)"><\/div>/;
+/** Marks a place the renderer fills in with a document, once it has a signed URL. */
+export const MEDIA_MARKER =
+  /<div data-media="([^"]*)" data-label="([^"]*)" data-mode="(embed|download)"><\/div>/;
 
 /**
  * The same marker for String.split. It carries exactly one capture group, because split
- * inserts every captured group into the result array -- with the two groups above, the
- * storage path and the label were being rendered as text alongside the document.
+ * inserts every captured group into the result array -- with the groups above, the storage
+ * path and the label were being rendered as text alongside the document.
  */
-export const PDF_SPLIT = /(<div data-pdf="(?:[^"]*)" data-label="(?:[^"]*)"><\/div>)/;
+export const MEDIA_SPLIT =
+  /(<div data-media="(?:[^"]*)" data-label="(?:[^"]*)" data-mode="(?:embed|download)"><\/div>)/;
 
 /**
  * Her PDFs are already positioned in the text -- WordPress embedded a viewer where the
@@ -52,21 +54,40 @@ export const PDF_SPLIT = /(<div data-pdf="(?:[^"]*)" data-label="(?:[^"]*)"><\/d
  * turned back into an embedded document. This leaves a marker for the renderer, which
  * needs an async signed URL and therefore cannot be done in a string pass.
  */
-export function markPdfEmbeds(html: string): string {
+export function markMedia(html: string): string {
   return html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (whole, attrs: string, label: string) => {
-    if (!/data-type="pdf"/i.test(attrs)) return whole;
     const href = /href="\/media\/([^"]+)"/i.exec(attrs);
     if (!href) return whole;
+    // data-type="pdf" is the one WordPress showed inline; the other 159 /media/ links are
+    // her "click here to download" anchors, which resolve to nothing here and were dead.
+    const mode = /data-type="pdf"/i.test(attrs) ? "embed" : "download";
     const text = label.replace(/<[^>]*>/g, "").trim();
-    return `<div data-pdf="${href[1]}" data-label="${escapeAttr(text)}"></div>`;
+    return `<div data-media="${href[1]}" data-label="${escapeAttr(text)}" data-mode="${mode}"></div>`;
   });
 }
 
-/** The storage paths embedded in a body, so the sidebar can skip what is already on show. */
-export function inlinePdfPaths(html: string): string[] {
-  return [...html.matchAll(/<a\b[^>]*href="\/media\/([^"]+)"[^>]*data-type="pdf"/gi)].map(
-    (m) => m[1],
+/**
+ * Her pages end with a row of navigation buttons -- "Live Event Dates", "View all
+ * Modules", "WWW Personal Planner" -- concatenated with no whitespace between them. As
+ * full-width stacked bars they read as more material, and her own instruction to "click
+ * the bottom right button" stops making sense.
+ *
+ * 529 sections carry prose followed by such a run. The other 124 are nothing but buttons:
+ * those are the module board's material lists and must stay as they are.
+ */
+export function groupTrailingNav(html: string): string {
+  const withoutButtons = html.replace(/<a class="btn"[^>]*>[\s\S]*?<\/a>/gi, "").trim();
+  if (withoutButtons.length < 40) return html;
+
+  return html.replace(
+    /((?:\s*<a class="btn"[^>]*>[\s\S]*?<\/a>)+)\s*$/i,
+    (run: string) => `\n\n<nav class="lesson-nav">${run.trim()}</nav>\n\n`,
   );
+}
+
+/** The storage paths shown in a body, so the sidebar can skip what is already on show. */
+export function inlinePdfPaths(html: string): string[] {
+  return [...html.matchAll(/<a\b[^>]*href="\/media\/([^"]+)"/gi)].map((m) => m[1]);
 }
 
 function escapeAttr(s: string): string {
@@ -107,7 +128,11 @@ export function autoParagraphs(html: string): string {
     .join("\n");
 }
 
-/** Every fix, in the order they depend on each other. */
+/**
+ * Every fix, in the order they depend on each other. The navigation run is grouped before
+ * paragraphs are added, so the <nav> is already a block and never gets wrapped in a <p>.
+ */
 export function prepareBody(html: string, firstName: string): string {
-  return autoParagraphs(markPdfEmbeds(rewriteLessonLinks(personalise(html, firstName))));
+  const linked = rewriteLessonLinks(personalise(html, firstName));
+  return autoParagraphs(groupTrailingNav(markMedia(linked)));
 }

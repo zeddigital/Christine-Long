@@ -74,6 +74,9 @@ body {
 .lesson-body h1 { font-size: 2.1rem; }
 .lesson-body h2 { font-size: 1.7rem; }
 .lesson-body h3 { font-size: 1.35rem; }
+/* h4 had no size of its own and inherited the default, rendering smaller than the body
+   text it introduces -- and she uses it for the closing instruction on most pages. */
+.lesson-body h4 { font-size: 1.15rem; }
 .lesson-body p { margin: 0 0 1.15rem; }
 /* Her headings are followed immediately by their explanation, so the paragraph should sit
    with the heading rather than float between the two. */
@@ -158,3 +161,34 @@ body {
   border: 1px solid var(--color-paper-rule); border-radius: 0 0 3px 3px;
   font-size: 0.85rem; color: var(--color-paper-soft);
 }
+
+/* ---------------------------------------------------------------------------
+   The navigation run that closes most pages. In her content these anchors are
+   concatenated with no whitespace at all, so as stacked full-width bars they
+   read as more material -- and "click the bottom right button" stops making
+   sense. A row restores both. The 124 sections that are nothing but buttons are
+   the module board's material lists and keep the stacked shape.
+   --------------------------------------------------------------------------- */
+.lesson-nav {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  margin: 2.25rem 0 0; padding-top: 1.6rem;
+  border-top: 1px solid var(--color-paper-rule);
+}
+.lesson-nav a.btn {
+  flex: 1 1 11rem; margin-bottom: 0;
+  padding: 0.8rem 1.1rem; font-size: 0.875rem;
+}
+
+/* Her "click here to download" anchors. 157 of the 159 point at a file that is
+   uploaded; the /media/ path they carry resolves to nothing, so they were dead. */
+.media-download { margin: 1.1rem 0; }
+.media-download a {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  background: var(--color-paper-fill); border: 1px solid var(--color-paper-rule);
+  border-radius: 3px; text-decoration: none;
+  font-size: 0.9rem; font-weight: 600; color: var(--color-paper-ink);
+  transition: background 0.15s, border-color 0.15s;
+}
+.media-download a:hover { background: #ececf0; border-color: #dfdfe4; }
+.media-download a[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }

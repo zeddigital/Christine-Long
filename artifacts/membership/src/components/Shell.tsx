@@ -10,7 +10,7 @@ export function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-ground">
       <header className="border-b border-rule-soft bg-ground-deep">
-        <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-4 px-6 py-5">
+        <div className="mx-auto flex max-w-[75rem] items-center justify-between gap-4 px-6 py-5">
           <Link
             href="/"
             className="font-serif text-[1.75rem] leading-none tracking-tight text-ink no-underline"
@@ -52,10 +52,10 @@ export function Shell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[100rem] flex-1 px-6 py-12">{children}</main>
+      <main className="mx-auto w-full max-w-[75rem] flex-1 px-6 py-12">{children}</main>
 
       <footer className="border-t border-rule-soft">
-        <div className="mx-auto max-w-[100rem] px-6 py-7 text-xs text-ink-faint">
+        <div className="mx-auto max-w-[75rem] px-6 py-7 text-xs text-ink-faint">
           A New You — member area. Your material is private to your account.
         </div>
       </footer>

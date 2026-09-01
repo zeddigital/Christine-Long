@@ -1,8 +1,8 @@
 import { useEffect, useState, type MouseEvent } from "react";
 import { useLocation } from "wouter";
-import { FileText, ExternalLink } from "lucide-react";
+import { FileText, ExternalLink, Download } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { PDF_MARKER, PDF_SPLIT, prepareBody } from "@/lib/content";
+import { MEDIA_MARKER, MEDIA_SPLIT, prepareBody } from "@/lib/content";
 
 /**
  * Renders a lesson section: Christine's HTML, with her PDFs embedded in place rather than
@@ -14,7 +14,7 @@ export function RichBody({ html, firstName }: { html: string; firstName: string 
 
   // Split on the PDF markers so each one becomes a real component. Injected HTML cannot
   // hold a viewer, because the URL has to be signed and that is asynchronous.
-  const parts = prepared.split(new RegExp(PDF_SPLIT.source, "g"));
+  const parts = prepared.split(new RegExp(MEDIA_SPLIT.source, "g"));
 
   /**
    * Her links are plain anchors inside injected HTML, so a click would reload the whole
@@ -43,8 +43,11 @@ export function RichBody({ html, firstName }: { html: string; firstName: string 
   return (
     <div className="lesson-body" onClick={onClick}>
       {parts.map((part, i) => {
-        const m = PDF_MARKER.exec(part);
-        if (m) return <PdfEmbed key={i} path={m[1]} label={decodeAttr(m[2])} />;
+        const m = MEDIA_MARKER.exec(part);
+        if (m)
+          return (
+            <MediaItem key={i} path={m[1]} label={decodeAttr(m[2])} mode={m[3] as "embed" | "download"} />
+          );
         if (!part.trim()) return null;
         // display:contents so the wrapper does not become a layout box between blocks.
         return (
@@ -64,7 +67,15 @@ function decodeAttr(s: string): string {
  * signed URL; storage policies re-check entitlement, so a member cannot mint one for a
  * module they do not hold.
  */
-function PdfEmbed({ path, label }: { path: string; label: string }) {
+function MediaItem({
+  path,
+  label,
+  mode,
+}: {
+  path: string;
+  label: string;
+  mode: "embed" | "download";
+}) {
   const [url, setUrl] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
 
@@ -82,6 +93,19 @@ function PdfEmbed({ path, label }: { path: string; label: string }) {
   }, [path]);
 
   const name = label || path.split("/").pop() || "Document";
+
+  // Her "click here to download" links were only ever links; showing a second copy of a
+  // document already embedded above would just be noise.
+  if (mode === "download") {
+    return (
+      <p className="media-download">
+        <a href={url ?? undefined} target="_blank" rel="noreferrer" aria-disabled={!url}>
+          <Download size={15} aria-hidden="true" />
+          {failed ? "This document isn't available yet" : name}
+        </a>
+      </p>
+    );
+  }
 
   return (
     <figure className="pdf-embed">
